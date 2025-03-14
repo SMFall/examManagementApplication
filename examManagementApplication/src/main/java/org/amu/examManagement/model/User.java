@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Users {
+public class User {
     @Id
     private Long user_id;
     private boolean active;
@@ -16,8 +16,8 @@ public class Users {
     private String username;
 
     //Constructor
-    public Users() {};
-    public Users(Long user_id, boolean active, String email, String password, String firstName, String lastName, String role) {
+    public User() {};
+    public User(Long user_id, boolean active, String email, String password, String firstName, String lastName, String role) {
         this.user_id = user_id;
         this.active = active;
         this.email = email;
