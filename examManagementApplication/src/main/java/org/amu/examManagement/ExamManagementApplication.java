@@ -1,4 +1,4 @@
-package org.amu.examManagement.examManagementApplication;
+package org.amu.examManagement;
 
 import org.amu.examManagement.model.Exam;
 import org.amu.examManagement.model.Question;
