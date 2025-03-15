@@ -14,16 +14,14 @@ public class MainController {
 
     // Affiche la page d'accueil
     @GetMapping("/")
-    @ResponseBody
     public String showHome(Model model) {
         return "homepage";
     }
 
     // Affiche la page 404
-    @GetMapping("/404")
-    @ResponseBody
+    @GetMapping("/error")
     public String showError() {
-        return "<h1>404</h1><h2>La page consultée n'existe pas</h2>";
+        return "404";
     }
 
 }
