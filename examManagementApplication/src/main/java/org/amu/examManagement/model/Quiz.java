@@ -13,7 +13,7 @@ public class Quiz {
 
     private String title;
 
-    @ManyToMany(mappedBy="questionList",fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy="quizList",fetch=FetchType.EAGER)
     private List<Question> questionList;
 
     public Quiz() {}

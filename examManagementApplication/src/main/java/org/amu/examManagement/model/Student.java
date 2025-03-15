@@ -18,7 +18,7 @@ public class Student {
     private String password;
     private String role;
 
-    @ManyToMany(mappedBy="studentList",fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy="studentListE",fetch=FetchType.EAGER)
     private List<Exam> examList;
 
     @ManyToMany(fetch=FetchType.EAGER)

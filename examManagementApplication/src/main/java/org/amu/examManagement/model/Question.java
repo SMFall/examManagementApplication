@@ -29,6 +29,7 @@ public class Question {
     @ManyToMany(fetch=FetchType.EAGER)
     private List<Quiz> quizList;
 
+
     // Constructeur par défaut
     public Question() {}
 
