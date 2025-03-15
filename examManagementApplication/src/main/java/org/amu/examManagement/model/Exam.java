@@ -1,9 +1,8 @@
 package org.amu.examManagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Entity
 public class Exam {
@@ -12,9 +11,16 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer courseId;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
     private String examTitle;
-    private Integer teacherId;
+    private LocalDate examDate;
+
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
 
     public Exam() {}
 
@@ -26,14 +32,6 @@ public class Exam {
         this.id = id;
     }
 
-    public Integer getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
-    }
-
     public String getExamTitle() {
         return examTitle;
     }
@@ -42,11 +40,15 @@ public class Exam {
         this.examTitle = examTitle;
     }
 
-    public Integer getTeacherId() {
-        return teacherId;
-    }
+    public LocalDate getExamDate() { return examDate; }
 
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
-    }
+    public void setExamDate(LocalDate examDate) { this.examDate = examDate; }
+
+    public Teacher getTeacher() { return teacher; }
+
+    public void setTeacher(Teacher teacher) { this.teacher = teacher; }
+
+    public Course getCourse() { return course; }
+
+    public void setCourse(Course course) { this.course = course;}
 }
