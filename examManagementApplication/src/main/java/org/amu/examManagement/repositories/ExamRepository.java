@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 public interface ExamRepository extends JpaRepository<Exam, Long> {
 
+    Exam findFirstByTeacher_IdOrderByExamDateAsc(Long teacherId);
+
 }

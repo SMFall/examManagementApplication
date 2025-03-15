@@ -62,6 +62,11 @@ public class ExamManagementApplication implements CommandLineRunner {
 		course.setCourseDescription("Cours avancé de mathématiques");
 		courseService.saveCourse(course);
 
+		Course course2 = new Course();
+		course2.setCourseName("Mathématiques approfondies");
+		course2.setCourseDescription("Cours avancé de mathématiques approfondies");
+		courseService.saveCourse(course2);
+
 		// Création d'un examen associé à l'enseignant et au cours
 		Exam exam = new Exam();
 		exam.setCourse(course);
@@ -69,6 +74,13 @@ public class ExamManagementApplication implements CommandLineRunner {
 		exam.setExamDate(LocalDate.of(2025, 3, 25));
 		exam.setTeacher(teacher);
 		examService.saveExam(exam);
+
+		Exam exam2 = new Exam();
+		exam2.setCourse(course);
+		exam2.setExamTitle("Examen de Mathématiques approfondies");
+		exam2.setExamDate(LocalDate.of(2025, 3, 26));
+		exam2.setTeacher(teacher);
+		examService.saveExam(exam2);
 
 		// Création d'un quiz
 		Quiz quiz = new Quiz();

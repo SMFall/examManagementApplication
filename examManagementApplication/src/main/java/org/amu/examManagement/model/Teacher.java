@@ -1,17 +1,16 @@
 package org.amu.examManagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long id;
     private boolean active;
     private String email;
     private String password;
@@ -19,10 +18,13 @@ public class Teacher {
     private String lastName;
     private String username;
 
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Exam> exams = new ArrayList<>();
+
     //Constructor
     public Teacher() {};
-    public Teacher(Long user_id, boolean active, String email, String password, String firstName, String lastName) {
-        this.user_id = user_id;
+    public Teacher(Long id, boolean active, String email, String password, String firstName, String lastName) {
+        this.id = id;
         this.active = active;
         this.email = email;
         this.password = password;
@@ -32,10 +34,10 @@ public class Teacher {
 
     //Getters and Setters
     public Long getUser_id() {
-        return user_id;
+        return id;
     }
     public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+        this.id = user_id;
     }
 
     public boolean isActive() { return active; }

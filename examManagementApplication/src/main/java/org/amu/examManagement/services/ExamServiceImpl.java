@@ -50,4 +50,9 @@ public class ExamServiceImpl implements ExamService {
                 .orElseThrow(() -> new RuntimeException("Exam not found for id : " + id));
         examRepository.delete(exam);
     }
+
+    @Override
+    public Exam getFirstExamByTeacherId(Long teacherId) {
+        return examRepository.findFirstByTeacher_IdOrderByExamDateAsc(teacherId);
+    }
 }
