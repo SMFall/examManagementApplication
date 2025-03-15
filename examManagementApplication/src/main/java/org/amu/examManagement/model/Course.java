@@ -1,19 +1,24 @@
 package org.amu.examManagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Course {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String courseName;
     private String courseDescription;
+
+    //Relation OneToMany avec Exam
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Exam> exams = new ArrayList<>();
+
+    @ManyToMany(mappedBy="courseList",fetch=FetchType.EAGER)
+    private List<Student> studentListC;
 
     public Course() {}
 

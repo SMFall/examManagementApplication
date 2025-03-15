@@ -3,6 +3,7 @@ package org.amu.examManagement.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Exam {
@@ -21,6 +22,9 @@ public class Exam {
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List<Student> studentListE;
 
     public Exam() {}
 

@@ -1,9 +1,8 @@
 package org.amu.examManagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Student {
@@ -15,6 +14,12 @@ public class Student {
     private String firstName;
     private String lastName;
     private String email;
+
+    @ManyToMany(mappedBy="studentList",fetch=FetchType.EAGER)
+    private List<Exam> examList;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List<Course> courseList;
 
     public Student() {}
 

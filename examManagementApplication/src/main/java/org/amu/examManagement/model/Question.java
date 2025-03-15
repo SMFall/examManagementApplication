@@ -1,11 +1,8 @@
 package org.amu.examManagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Question {
@@ -27,6 +24,10 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "exam_id")
     private Exam exam;
+
+    // Relation ManyToMany avec Quiz
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List<Quiz> quizList;
 
     // Constructeur par défaut
     public Question() {}
