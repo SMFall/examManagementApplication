@@ -84,7 +84,7 @@ public class ExamManagementApplication implements CommandLineRunner {
 		question.setOption3("3x");
 		question.setOption4("x + 2");
 		question.setQuestionTitle("Quelle est la dérivée de x² ?");
-		question.setRightAnswer(2);
+		question.setRightAnswer(1);
 		question.setExam(exam);
 		questionService.saveQuestion(question);
 

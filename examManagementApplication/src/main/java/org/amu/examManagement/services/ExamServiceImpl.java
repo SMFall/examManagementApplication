@@ -38,8 +38,8 @@ public class ExamServiceImpl implements ExamService {
                 .orElseThrow(() -> new RuntimeException("Exam not found for id : " + id));
         exam.setCourse(examDetails.getCourse());
         exam.setExamTitle(examDetails.getExamTitle());
-        //exam.setExamDate(examDetails.getExamDate());
-        //exam.setTeacher(examDetails.getTeacher());
+        exam.setExamDate(examDetails.getExamDate());
+        exam.setTeacher(examDetails.getTeacher());
         return examRepository.save(exam);
     }
 
