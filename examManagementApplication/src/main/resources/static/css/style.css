@@ -1,0 +1,42 @@
+/* Style global */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Section Hero */
+.hero {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    padding: 80px 0;
+}
+
+/* Icônes */
+.bi {
+    font-size: 3rem;
+}
+
+/* Boutons */
+.btn-light {
+    border-radius: 25px;
+}
+
+/* Section Fonctionnalités */
+section.container {
+    padding: 50px 0;
+}
+
+/* Centrer le texte */
+.container {
+    text-align: center;
+}
+
+/* Style du 404 */
+.display-1 {
+    font-size: 8rem;
+}
+
+/* Bouton */
+.btn-primary {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 25px;
+}
