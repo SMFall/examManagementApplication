@@ -58,6 +58,24 @@ public class ExamManagementApplication implements CommandLineRunner {
 		teacher.setUsername("david.doe");
 		teacherService.saveTeacher(teacher);
 
+		Teacher teacher2 = new Teacher();
+		teacher2.setActive(true);
+		teacher2.setEmail("john.true@yahoo.fr");
+		teacher2.setPassword("abc123");
+		teacher2.setFirstName("John");
+		teacher2.setLastName("True");
+		teacher2.setUsername("john.true");
+		teacherService.saveTeacher(teacher2);
+
+		Teacher teacher3 = new Teacher();
+		teacher3.setActive(true);
+		teacher3.setEmail("bob.low@outlook.com");
+		teacher3.setPassword("boblow");
+		teacher3.setFirstName("Bob");
+		teacher3.setLastName("Low");
+		teacher3.setUsername("bob.low");
+		teacherService.saveTeacher(teacher3);
+
 		// Création d'un cours
 		Course course = new Course();
 		course.setCourseName("Mathématiques");
