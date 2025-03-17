@@ -1,8 +1,11 @@
 package org.amu.examManagement.controllers;
 
 import org.amu.examManagement.model.Exam;
+import org.amu.examManagement.model.Quiz;
 import org.amu.examManagement.model.Teacher;
+import org.amu.examManagement.repositories.QuizRepository;
 import org.amu.examManagement.services.ExamService;
+import org.amu.examManagement.services.QuizService;
 import org.amu.examManagement.services.TeacherService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,10 @@ public class MainController {
 
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private QuizRepository quizRepository;
+    @Autowired
+    private QuizService quizService;
 
     // Affiche la page d'accueil
     @GetMapping("/")
@@ -28,12 +35,19 @@ public class MainController {
     // Affiche la page tableau de bord
     @GetMapping("/teacher/{id}/dashboard")
     public String showDashboard(@PathVariable Long id, Model model) {
+
         // On récupère l'enseignant dont l'identifiant correspond au paramètre
         Optional<Teacher> teacherOpt = teacherService.getTeacher(id);
+        List<Quiz> quizList = quizService.getAllQuiz();
+        List<Teacher> teacherList = teacherService.getAllTeachers();
+
         // Si on trouve le teacher correspondant, on envoie l'objet dans le model
         if (teacherOpt.isPresent()) {
             model.addAttribute("teacher", teacherOpt.get());
+            model.addAttribute("quizList", quizList);
+            model.addAttribute("teacherList", teacherList);
             return "dashboard";
+
         } else {
             // Sinon on redirige vers la page 404
             return "redirect:/error";

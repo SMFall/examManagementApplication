@@ -6,6 +6,8 @@ import org.amu.examManagement.repositories.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuizServiceImpl implements QuizService {
 
@@ -14,7 +16,12 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     @Transactional
-    public void saveQuiz(Quiz quiz) {
-        quizRepository.save(quiz);
+    public void saveAllQuiz(List<Quiz> quizList) {
+        quizRepository.saveAll(quizList);
+    }
+
+    @Override
+    public List<Quiz> getAllQuiz() {
+        return quizRepository.findAll();
     }
 }

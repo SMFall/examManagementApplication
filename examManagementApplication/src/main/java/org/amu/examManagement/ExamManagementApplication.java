@@ -18,6 +18,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ExamManagementApplication implements CommandLineRunner {
@@ -82,10 +84,37 @@ public class ExamManagementApplication implements CommandLineRunner {
 		exam2.setTeacher(teacher);
 		examService.saveExam(exam2);
 
-		// Création d'un quiz
-		Quiz quiz = new Quiz();
-		quiz.setTitle("Quiz Mathématiques");
-		quizService.saveQuiz(quiz);
+		// Création de plusieurs quiz
+
+		Quiz quiz1 = new Quiz();
+		Quiz quiz2 = new Quiz();
+		Quiz quiz3 = new Quiz();
+		Quiz quiz4 = new Quiz();
+		Quiz quiz5 = new Quiz();
+		Quiz quiz6 = new Quiz();
+		Quiz quiz7 = new Quiz();
+		Quiz quiz8 = new Quiz();
+
+		quiz1.setTitle("Quiz Mathématiques");
+		quiz2.setTitle("Quiz Français");
+		quiz3.setTitle("Quiz Anglais");
+		quiz4.setTitle("Quiz Histoire");
+		quiz5.setTitle("Quiz Géographie");
+		quiz6.setTitle("Quiz Espagnol");
+		quiz7.setTitle("Quiz Biologie");
+		quiz8.setTitle("Quiz Chimie");
+
+		List<Quiz> quizList = new ArrayList<>();
+		quizList.add(quiz1);
+		quizList.add(quiz2);
+		quizList.add(quiz3);
+		quizList.add(quiz4);
+		quizList.add(quiz5);
+		quizList.add(quiz6);
+		quizList.add(quiz7);
+		quizList.add(quiz8);
+
+		quizService.saveAllQuiz(quizList);
 
 		// Création d'une question
 		Question question = new Question();

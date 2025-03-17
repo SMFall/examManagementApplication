@@ -6,6 +6,7 @@ import org.amu.examManagement.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,7 +16,6 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherRepository teacherRepository;
 
     @Override
-    @Transactional
     public Optional<Teacher> getTeacher(Long id) {
         return teacherRepository.findById(id);
     }
@@ -25,4 +25,10 @@ public class TeacherServiceImpl implements TeacherService {
     public void saveTeacher(Teacher teacher) {
         teacherRepository.save(teacher);
     }
+
+    @Override
+    public List<Teacher> getAllTeachers() {
+        return teacherRepository.findAll();
+    }
+
 }
