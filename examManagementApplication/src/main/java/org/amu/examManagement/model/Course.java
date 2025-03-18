@@ -18,7 +18,7 @@ public class Course {
     private List<Exam> exams = new ArrayList<>();
 
     @ManyToMany(mappedBy="courseList",fetch=FetchType.EAGER)
-    private List<Student> studentListC;
+    private List<Users> usersListC;
 
     public Course() {}
 

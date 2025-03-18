@@ -2,11 +2,11 @@ package org.amu.examManagement.controllers;
 
 import org.amu.examManagement.model.Exam;
 import org.amu.examManagement.model.Quiz;
-import org.amu.examManagement.model.Teacher;
+import org.amu.examManagement.model.Users;
 import org.amu.examManagement.repositories.QuizRepository;
 import org.amu.examManagement.services.ExamService;
 import org.amu.examManagement.services.QuizService;
-import org.amu.examManagement.services.TeacherService;
+import org.amu.examManagement.services.UsersService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class MainController {
 
     @Autowired
-    private TeacherService teacherService;
+    private UsersService usersService;
     @Autowired
     private QuizRepository quizRepository;
     @Autowired
@@ -33,19 +33,19 @@ public class MainController {
     }
 
     // Affiche la page tableau de bord
-    @GetMapping("/teacher/{id}/dashboard")
+    @GetMapping("/users/{id}/dashboard")
     public String showDashboard(@PathVariable Long id, Model model) {
 
         // On récupère l'enseignant dont l'identifiant correspond au paramètre
-        Optional<Teacher> teacherOpt = teacherService.getTeacher(id);
+        Optional<Users> usersOpt = usersService.getUsers(id);
         List<Quiz> quizList = quizService.getAllQuiz();
-        List<Teacher> teacherList = teacherService.getAllTeachers();
+        List<Users> usersList = usersService.getAllUsersWithRole("teacher");
 
-        // Si on trouve le teacher correspondant, on envoie l'objet dans le model
-        if (teacherOpt.isPresent()) {
-            model.addAttribute("teacher", teacherOpt.get());
+        // Si on trouve le users correspondant, on envoie l'objet dans le model
+        if (usersOpt.isPresent()) {
+            model.addAttribute("users", usersOpt.get());
             model.addAttribute("quizList", quizList);
-            model.addAttribute("teacherList", teacherList);
+            model.addAttribute("usersList", usersList);
             return "dashboard";
 
         } else {

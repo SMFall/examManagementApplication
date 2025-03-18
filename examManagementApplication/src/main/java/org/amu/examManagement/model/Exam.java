@@ -20,11 +20,11 @@ public class Exam {
     private LocalDate examDate;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+    @JoinColumn(name = "users_id")
+    private Users users;
 
     @ManyToMany(fetch=FetchType.EAGER)
-    private List<Student> studentListE;
+    private List<Users> usersListE;
 
     public Exam() {}
 
@@ -48,9 +48,9 @@ public class Exam {
 
     public void setExamDate(LocalDate examDate) { this.examDate = examDate; }
 
-    public Teacher getTeacher() { return teacher; }
+    public Users getUsers() { return users; }
 
-    public void setTeacher(Teacher teacher) { this.teacher = teacher; }
+    public void setUsers(Users users) { this.users = users; }
 
     public Course getCourse() { return course; }
 

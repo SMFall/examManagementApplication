@@ -47,8 +47,8 @@ public class ExamRestController {
         return "Exam deleted with id : " + id;
     }
 
-    @GetMapping("/firstExam/{teacherId}")
-    public Exam getFirstExamByTeacherId(@PathVariable Long teacherId) {
-        return examService.getFirstExamByTeacherId(teacherId);
+    @GetMapping("/firstExam/{usersId}")
+    public Exam getFirstTeacherExamByUsersId(@PathVariable Long usersId) {
+        return examService.getFirstTeacherExamByUsersId(usersId);
     }
 }

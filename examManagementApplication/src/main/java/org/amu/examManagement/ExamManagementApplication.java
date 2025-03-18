@@ -4,14 +4,12 @@ import org.amu.examManagement.model.Course;
 import org.amu.examManagement.model.Exam;
 import org.amu.examManagement.model.Question;
 import org.amu.examManagement.model.Quiz;
-import org.amu.examManagement.model.Teacher;
-import org.amu.examManagement.model.Student;
+import org.amu.examManagement.model.Users;
 import org.amu.examManagement.services.CourseService;
 import org.amu.examManagement.services.ExamService;
 import org.amu.examManagement.services.QuestionService;
 import org.amu.examManagement.services.QuizService;
-import org.amu.examManagement.services.TeacherService;
-import org.amu.examManagement.services.StudentService;
+import org.amu.examManagement.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -34,10 +32,7 @@ public class ExamManagementApplication implements CommandLineRunner {
 	private QuizService quizService;
 
 	@Autowired
-	private TeacherService teacherService;
-
-	@Autowired
-	private StudentService studentService;
+	private UsersService usersService;
 
 	@Autowired
 	private CourseService courseService;
@@ -48,33 +43,46 @@ public class ExamManagementApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// Création d'un enseignant
-		Teacher teacher = new Teacher();
-		teacher.setActive(true);
-		teacher.setEmail("david.doe@gmail.com");
-		teacher.setPassword("password");
-		teacher.setFirstName("David");
-		teacher.setLastName("Doe");
-		teacher.setUsername("david.doe");
-		teacherService.saveTeacher(teacher);
 
-		Teacher teacher2 = new Teacher();
-		teacher2.setActive(true);
-		teacher2.setEmail("john.true@yahoo.fr");
-		teacher2.setPassword("abc123");
-		teacher2.setFirstName("John");
-		teacher2.setLastName("True");
-		teacher2.setUsername("john.true");
-		teacherService.saveTeacher(teacher2);
+		// Création de trois enseignants
+		Users users = new Users();
+		users.setActive(true);
+		users.setEmail("david.doe@gmail.com");
+		users.setPassword("password");
+		users.setFirstName("David");
+		users.setLastName("Doe");
+		users.setUsername("david.doe");
+		users.setRole("teacher");
+		usersService.saveUsers(users);
 
-		Teacher teacher3 = new Teacher();
-		teacher3.setActive(true);
-		teacher3.setEmail("bob.low@outlook.com");
-		teacher3.setPassword("boblow");
-		teacher3.setFirstName("Bob");
-		teacher3.setLastName("Low");
-		teacher3.setUsername("bob.low");
-		teacherService.saveTeacher(teacher3);
+		Users users2 = new Users();
+		users2.setActive(true);
+		users2.setEmail("john.true@yahoo.fr");
+		users2.setPassword("abc123");
+		users2.setFirstName("John");
+		users2.setLastName("True");
+		users2.setUsername("john.true");
+		users2.setRole("teacher");
+		usersService.saveUsers(users2);
+
+		Users users3 = new Users();
+		users3.setActive(true);
+		users3.setEmail("bob.low@outlook.com");
+		users3.setPassword("boblow");
+		users3.setFirstName("Bob");
+		users3.setLastName("Low");
+		users3.setUsername("bob.low");
+		users3.setRole("teacher");
+		usersService.saveUsers(users3);
+
+		// Création d'un étudiant
+		Users users4 = new Users();
+		users4.setFirstName("Alice");
+		users4.setLastName("Smith");
+		users4.setEmail("alice.smith@gmail.com");
+		users4.setPassword("password");
+		users4.setRole("student");
+		usersService.saveUsers(users4);
 
 		// Création d'un cours
 		Course course = new Course();
@@ -92,14 +100,14 @@ public class ExamManagementApplication implements CommandLineRunner {
 		exam.setCourse(course);
 		exam.setExamTitle("Examen de Mathématiques");
 		exam.setExamDate(LocalDate.of(2025, 3, 25));
-		exam.setTeacher(teacher);
+		exam.setUsers(users);
 		examService.saveExam(exam);
 
 		Exam exam2 = new Exam();
 		exam2.setCourse(course);
 		exam2.setExamTitle("Examen de Mathématiques approfondies");
 		exam2.setExamDate(LocalDate.of(2025, 3, 26));
-		exam2.setTeacher(teacher);
+		exam2.setUsers(users);
 		examService.saveExam(exam2);
 
 		// Création de plusieurs quiz
@@ -146,13 +154,6 @@ public class ExamManagementApplication implements CommandLineRunner {
 		question.setRightAnswer(1);
 		question.setExam(exam);
 		questionService.saveQuestion(question);
-
-		// Création d'un étudiant
-		Student student = new Student();
-		student.setFirstName("Alice");
-		student.setLastName("Smith");
-		student.setEmail("alice.smith@gmail.com");
-		studentService.saveStudent(student);
 
 		System.out.println("Données initialisées !");
 	}

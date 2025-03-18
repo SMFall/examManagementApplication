@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Teacher {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,19 +17,28 @@ public class Teacher {
     private String firstName;
     private String lastName;
     private String username;
+    private String role;
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Exam> exams = new ArrayList<>();
 
+    @ManyToMany(mappedBy="usersListE",fetch=FetchType.EAGER)
+    private List<Exam> examList;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List<Course> courseList;
+
     //Constructor
-    public Teacher() {};
-    public Teacher(Long id, boolean active, String email, String password, String firstName, String lastName) {
+    public Users() {};
+    public Users(Long id, boolean active, String email, String username, String password, String firstName, String lastName, String role ) {
         this.id = id;
         this.active = active;
         this.email = email;
+        this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 
     //Getters and Setters
@@ -78,6 +87,13 @@ public class Teacher {
     }
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
 
 

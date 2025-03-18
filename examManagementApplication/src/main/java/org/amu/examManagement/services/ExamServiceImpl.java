@@ -39,7 +39,7 @@ public class ExamServiceImpl implements ExamService {
         exam.setCourse(examDetails.getCourse());
         exam.setExamTitle(examDetails.getExamTitle());
         exam.setExamDate(examDetails.getExamDate());
-        exam.setTeacher(examDetails.getTeacher());
+        exam.setUsers(examDetails.getUsers());
         return examRepository.save(exam);
     }
 
@@ -52,7 +52,7 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public Exam getFirstExamByTeacherId(Long teacherId) {
-        return examRepository.findFirstByTeacher_IdOrderByExamDateAsc(teacherId);
+    public Exam getFirstTeacherExamByUsersId(Long usersId) {
+        return examRepository.findFirstByTeacherIdOrderByExamDateAsc(usersId, "teacher");
     }
 }
