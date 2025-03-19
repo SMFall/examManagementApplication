@@ -84,20 +84,20 @@
         <section class="stats row g-4">
             <div class="col-md-4">
                 <div class="stat-card bg-primary text-white p-4 rounded">
-                    <h3>Cours actifs</h3>
-                    <p>5</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-card bg-info text-white p-4 rounded">
-                    <h3>Étudiants inscrits</h3>
-                    <p>120</p>
+                    <h3>Nombre de cours</h3>
+                    <p th:text="${nbCourses}"></p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="stat-card bg-warning text-white p-4 rounded">
-                    <h3>Devoirs à corriger</h3>
-                    <p>8</p>
+                    <h3>Nombre de quiz</h3>
+                    <p th:text="${nbQuiz}"></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card bg-info text-white p-4 rounded">
+                    <h3>Nombre d'étudiants</h3>
+                    <p th:text="${nbStudents}"></p>
                 </div>
             </div>
         </section>

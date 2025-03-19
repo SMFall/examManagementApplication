@@ -238,6 +238,14 @@ public class MainController {
         List<Quiz> quizList = quizService.getAllQuiz();
         List<Users> usersList = usersService.getAllUsersWithRole("teacher");
 
+        int nbCourses = courseService.getAllCourses().size();
+        int nbQuiz = quizList.size();
+        int nbStudents = usersService.getAllUsersWithRole("student").size();
+
+        model.addAttribute("nbCourses", nbCourses);
+        model.addAttribute("nbQuiz", nbQuiz);
+        model.addAttribute("nbStudents", nbStudents);
+
         // Si on trouve le users correspondant, on envoie l'objet dans le model
         if (usersOpt.isPresent()) {
             model.addAttribute("users", usersOpt.get());
