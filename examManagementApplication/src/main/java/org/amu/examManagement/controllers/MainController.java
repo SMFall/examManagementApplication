@@ -1,5 +1,6 @@
 package org.amu.examManagement.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.amu.examManagement.model.Course;
 import org.amu.examManagement.model.Exam;
 import org.amu.examManagement.model.Quiz;
@@ -196,7 +197,20 @@ public class MainController {
 
     // Affiche la page tableau de bord
     @GetMapping("/users/{id}/dashboard")
-    public String showDashboard(@PathVariable Long id, Model model) {
+    public String showDashboard(@PathVariable Long id,
+                                HttpSession session,
+                                Model model) {
+        // Vérifier si un user est en session
+        Users loggedUser = (Users) session.getAttribute("loggedUser");
+        if (loggedUser == null) {
+            // Personne n'est connecté, on redirige vers login
+            return "redirect:/login";
+        }
+
+        // Vérifier si c'est bien le user qui a le droit de voir ce dashboard
+        if (!loggedUser.getUser_id().equals(id)) {
+            return "redirect:/error";
+        }
 
         // On récupère l'enseignant dont l'identifiant correspond au paramètre
         Optional<Users> usersOpt = usersService.getUsers(id);

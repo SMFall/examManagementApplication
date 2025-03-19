@@ -31,4 +31,8 @@ public class UsersServiceImpl implements UsersService {
         return usersRepository.findAllUsersWithRole(role);
     }
 
+    @Override
+    public Optional<Users> findByUsername(String username) {
+        return usersRepository.findByUsername(username);
+    }
 }

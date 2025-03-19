@@ -15,4 +15,5 @@ public interface UsersService {
 
     public List<Users> getAllUsersWithRole(String role);
 
+    public Optional<Users> findByUsername(String username);
 }

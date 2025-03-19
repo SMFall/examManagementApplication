@@ -23,17 +23,16 @@
             <li><a href="/missing" class="text-white text-decoration-none">Étudiants</a></li>
             <li><a href="/missing" class="text-white text-decoration-none">Évaluations</a></li>
             <li><a href="/missing" class="text-white text-decoration-none">Paramètres</a></li>
-            <li><a href="/" class="text-white text-decoration-none">Déconnexion</a></li>
         </ul>
     </aside>
 
     <!-- Content -->
     <main class="content flex-grow-1 p-5">
         <th:block th:if="${#strings.equals(users.role, 'teacher')}">
-            <h1 class="mb-4">Espace enseignant</h1>
+            <h1 class="mb-4">Espace enseignant</h1><a href="/logout" class="btn btn-danger">Se déconnecter</a>
         </th:block>
         <th:block th:if="${#strings.equals(users.role, 'student')}">
-            <h1 class="mb-4">Espace étudiant</h1>
+            <h1 class="mb-4">Espace étudiant</h1><a href="/logout" class="btn btn-danger">Se déconnecter</a>
         </th:block>
         <h3>Connecté en tant que
             <span class="text-primary" th:text="${users.firstName}"></span>
