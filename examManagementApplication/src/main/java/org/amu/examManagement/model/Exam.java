@@ -26,6 +26,9 @@ public class Exam {
     @ManyToMany(fetch=FetchType.EAGER)
     private List<Users> usersListE;
 
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Question> questions;
+
     public Exam() {}
 
     public Long getId() {
@@ -42,6 +45,13 @@ public class Exam {
 
     public void setExamTitle(String examTitle) {
         this.examTitle = examTitle;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public LocalDate getExamDate() { return examDate; }
