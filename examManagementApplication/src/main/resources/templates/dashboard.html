@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Bord - Professeur</title>
+    <title>Tableau de bord - Professeur</title>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Lien vers le fichier CSS personnalisé -->
@@ -18,9 +18,9 @@
     <aside class="sidebar bg-dark text-white p-4">
         <h2 class="mb-4">Menu</h2>
         <ul class="list-unstyled">
-            <li><a href="/missing" class="text-white text-decoration-none">Accueil</a></li>
-            <li><a href="/missing" class="text-white text-decoration-none">Mes Cours</a></li>
-            <li><a href="/missing" class="text-white text-decoration-none">Étudiants</a></li>
+            <li><a href="./dashboard" class="text-white text-decoration-none">Accueil</a></li>
+            <li><a href="/courses" class="text-white text-decoration-none">Les cours</a></li>
+            <li><a href="/exams" class="text-white text-decoration-none">Mes examens</a></li>
             <li><a href="/missing" class="text-white text-decoration-none">Évaluations</a></li>
             <li><a href="/missing" class="text-white text-decoration-none">Paramètres</a></li>
         </ul>
@@ -84,19 +84,19 @@
         <section class="stats row g-4">
             <div class="col-md-4">
                 <div class="stat-card bg-primary text-white p-4 rounded">
-                    <h3>Cours Actifs</h3>
+                    <h3>Cours actifs</h3>
                     <p>5</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="stat-card bg-info text-white p-4 rounded">
-                    <h3>Étudiants Inscrits</h3>
+                    <h3>Étudiants inscrits</h3>
                     <p>120</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="stat-card bg-warning text-white p-4 rounded">
-                    <h3>Devoirs à Corriger</h3>
+                    <h3>Devoirs à corriger</h3>
                     <p>8</p>
                 </div>
             </div>
@@ -104,7 +104,7 @@
 
         <!-- Graphique -->
         <section class="chart mt-5">
-            <h2 class="mb-4">Progression des Étudiants</h2>
+            <h2 class="mb-4">Progression des étudiants</h2>
             <canvas id="progressChart"></canvas>
         </section>
     </main>

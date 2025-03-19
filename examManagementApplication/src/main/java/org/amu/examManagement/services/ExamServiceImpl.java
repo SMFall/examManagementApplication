@@ -55,4 +55,9 @@ public class ExamServiceImpl implements ExamService {
     public Exam getFirstTeacherExamByUsersId(Long usersId) {
         return examRepository.findFirstByTeacherIdOrderByExamDateAsc(usersId, "teacher");
     }
+
+    @Override
+    public List<Exam> getExamsByTeacherId(Long teacherId) {
+        return examRepository.findByTeacherId(teacherId);
+    }
 }

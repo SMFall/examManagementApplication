@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Formulaire Examen</title>
+    <title>Formulaire examen</title>
     <!-- Bootstrap CSS -->
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link rel="stylesheet"
@@ -39,19 +39,6 @@
                         th:value="${c.id}"
                         th:text="${c.courseName}"
                         th:selected="${exam.course != null} ? ${c.id} == ${exam.course.id} : false">
-                </option>
-            </select>
-        </div>
-
-        <!-- Choix de l'enseignant (optionnel) -->
-        <div class="mb-3">
-            <label for="teacherId" class="form-label">Enseignant</label>
-            <select class="form-select" id="teacherId" name="teacherId">
-                <option value="">-- Sélectionnez un enseignant --</option>
-                <option th:each="t : ${teachers}"
-                        th:value="${t.user_id}"
-                        th:text="${t.firstName + ' ' + t.lastName}"
-                        th:selected="${exam.users != null} ? ${t.user_id} == ${exam.users.user_id} : false">
                 </option>
             </select>
         </div>

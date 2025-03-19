@@ -38,10 +38,24 @@ public class MainController {
     // ==================================
 
     @GetMapping("/exams")
-    public String showExamsList(Model model) {
-        List<Exam> exams = examService.getAllExams();
-        model.addAttribute("exams", exams);
-        return "exams";
+    public String showExamsList(Model model,
+                                HttpSession session) {
+        // Récupérer l'utilisateur connecté
+        Users loggedUser = (Users) session.getAttribute("loggedUser");
+        if (loggedUser == null) {
+            // Pas connecté -> redirige vers login
+            return "redirect:/login";
+        }
+
+        // S'il s'agit d'un professeur, on affiche uniquement SES examens.
+        if ("teacher".equals(loggedUser.getRole())) {
+            // On récupère les exams
+            List<Exam> exams = examService.getExamsByTeacherId(loggedUser.getUser_id());
+            model.addAttribute("exams", exams);
+            return "exams";
+        } else {
+            return "redirect:/error";
+        }
     }
 
     // Afficher le formulaire pour ajouter un nouvel examen
@@ -62,18 +76,25 @@ public class MainController {
     @PostMapping("/exams")
     public String createExam(@ModelAttribute("exam") Exam exam,
                              @RequestParam(name = "courseId", required = false) Long courseId,
-                             @RequestParam(name = "teacherId", required = false) Long teacherId) {
+                             HttpSession session) {
 
-        if(courseId != null) {
+        // On récupère l'utilisateur connecté
+        Users loggedUser = (Users) session.getAttribute("loggedUser");
+        if (loggedUser == null) {
+            // Personne n'est connecté -> rediriger vers la page de login
+            return "redirect:/login";
+        }
+
+        // On assigne cet enseignant à l'examen
+        exam.setUsers(loggedUser);
+
+        // On vérifie si un cours a été sélectionné
+        if (courseId != null) {
             Optional<Course> courseOpt = courseService.getCourseById(courseId);
             courseOpt.ifPresent(exam::setCourse);
         }
 
-        if(teacherId != null) {
-            Optional<Users> teacherOpt = usersService.getUsers(teacherId);
-            teacherOpt.ifPresent(exam::setUsers);
-        }
-
+        // On enregistre l'examen
         examService.saveExam(exam);
         return "redirect:/exams";
     }
