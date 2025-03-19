@@ -1,5 +1,6 @@
 package org.amu.examManagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -23,12 +24,12 @@ public class Question {
     // Relation ManyToOne avec Exam
     @ManyToOne
     @JoinColumn(name = "exam_id")
+    @JsonIgnore
     private Exam exam;
 
     // Relation ManyToMany avec Quiz
     @ManyToMany(fetch=FetchType.EAGER)
     private List<Quiz> quizList;
-
 
     // Constructeur par défaut
     public Question() {}
