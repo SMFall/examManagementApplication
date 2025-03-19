@@ -60,4 +60,9 @@ public class ExamServiceImpl implements ExamService {
     public List<Exam> getExamsByTeacherId(Long teacherId) {
         return examRepository.findByTeacherId(teacherId);
     }
+
+    @Override
+    public List<Exam> getAllExamsForStudent(Long studentId) {
+        return examRepository.findAllExamsForStudent(studentId);
+    }
 }

@@ -17,7 +17,7 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Exam> exams = new ArrayList<>();
 
-    @ManyToMany(mappedBy="courseList",fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<Users> usersListC;
 
     public Course() {}
@@ -48,5 +48,13 @@ public class Course {
     }
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
+    }
+
+    public List<Users> getUsersListC() {
+        return usersListC;
+    }
+
+    public void setUsersListC(List<Users> usersListC) {
+        this.usersListC = usersListC;
     }
 }

@@ -1,5 +1,6 @@
 package org.amu.examManagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -25,7 +26,8 @@ public class Users {
     @ManyToMany(mappedBy="usersListE",fetch=FetchType.EAGER)
     private List<Exam> examList;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy="usersListC", fetch=FetchType.EAGER)
+    @JsonIgnore
     private List<Course> courseList;
 
     //Constructor
@@ -96,5 +98,11 @@ public class Users {
         this.role = role;
     }
 
+    public List<Course> getCourseList() {
+        return courseList;
+    }
 
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
 }

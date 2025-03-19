@@ -51,4 +51,10 @@ public class ExamRestController {
     public Exam getFirstTeacherExamByUsersId(@PathVariable Long usersId) {
         return examService.getFirstTeacherExamByUsersId(usersId);
     }
+
+    // Récupérer tous les examens d'un étudiant
+    @GetMapping("/allExams/{usersId}")
+    public List<Exam> getAllExamsForStudent(@PathVariable Long usersId) {
+        return examService.getAllExamsForStudent(usersId);
+    }
 }

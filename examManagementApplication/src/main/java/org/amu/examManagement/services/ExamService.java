@@ -16,4 +16,5 @@ public interface ExamService {
     public void deleteExam(Long id);
     public Exam getFirstTeacherExamByUsersId(Long teacherId);
     public List<Exam> getExamsByTeacherId(Long teacherId);
+    public List<Exam> getAllExamsForStudent(Long studentId);
 }

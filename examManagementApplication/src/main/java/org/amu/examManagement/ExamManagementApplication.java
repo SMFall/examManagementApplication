@@ -85,15 +85,20 @@ public class ExamManagementApplication implements CommandLineRunner {
 		users4.setRole("student");
 		usersService.saveUsers(users4);
 
+		List<Users> usersList = new ArrayList<>();
+		usersList.add(users4);
+
 		// Création d'un cours
 		Course course = new Course();
 		course.setCourseName("Mathématiques");
 		course.setCourseDescription("Cours avancé de mathématiques");
+		course.setUsersListC(usersList);
 		courseService.saveCourse(course);
 
 		Course course2 = new Course();
 		course2.setCourseName("Mathématiques approfondies");
 		course2.setCourseDescription("Cours avancé de mathématiques approfondies");
+		course2.setUsersListC(usersList);
 		courseService.saveCourse(course2);
 
 		// Création d'un examen associé à l'enseignant et au cours
@@ -105,7 +110,7 @@ public class ExamManagementApplication implements CommandLineRunner {
 		examService.saveExam(exam);
 
 		Exam exam2 = new Exam();
-		exam2.setCourse(course);
+		exam2.setCourse(course2);
 		exam2.setExamTitle("Examen de Mathématiques approfondies");
 		exam2.setExamDate(LocalDate.of(2025, 3, 26));
 		exam2.setUsers(users);
