@@ -19,9 +19,9 @@
         <h2 class="mb-4">Menu</h2>
         <ul class="list-unstyled">
             <li><a href="./dashboard" class="text-white text-decoration-none">Accueil</a></li>
-            <li><a href="/courses" class="text-white text-decoration-none">Les cours</a></li>
-            <li><a href="/exams" class="text-white text-decoration-none">Mes examens</a></li>
-            <li><a href="/missing" class="text-white text-decoration-none">Évaluations</a></li>
+            <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/courses" class="text-white text-decoration-none">Les cours</a></li>
+            <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/exams" class="text-white text-decoration-none">Mes examens</a></li>
+            <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/missing" class="text-white text-decoration-none">Évaluations</a></li>
             <li><a href="/missing" class="text-white text-decoration-none">Paramètres</a></li>
         </ul>
     </aside>
