@@ -80,6 +80,7 @@ public class ExamManagementApplication implements CommandLineRunner {
 		users4.setFirstName("Alice");
 		users4.setLastName("Smith");
 		users4.setEmail("alice.smith@gmail.com");
+		users4.setUsername("alice.smith");
 		users4.setPassword("password");
 		users4.setRole("student");
 		usersService.saveUsers(users4);
