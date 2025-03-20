@@ -13,6 +13,8 @@ public interface UsersService {
 
     public void saveUsers(Users users);
 
+    public void saveAllUsers(List<Users> allUsers);
+
     public List<Users> getAllUsersWithRole(String role);
 
     public Optional<Users> findByUsername(String username);

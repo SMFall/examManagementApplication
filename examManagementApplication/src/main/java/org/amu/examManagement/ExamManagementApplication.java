@@ -88,6 +88,32 @@ public class ExamManagementApplication implements CommandLineRunner {
 		List<Users> usersList = new ArrayList<>();
 		usersList.add(users4);
 
+		// Création d'autres étudiants "non actifs"
+		List<Users> otherUsers = new ArrayList<>();
+		for (int i = 0; i < 146; i++) {
+			Users usersx = new Users();
+			usersx.setActive(Boolean.FALSE);
+			usersx.setFirstName("Student " + i);
+			usersx.setLastName("Lastname");
+			usersx.setEmail("student" + i + "@mymail.fr");
+			usersx.setUsername("student" + i + ".lastname");
+			usersx.setPassword("password");
+			usersx.setRole("student");
+			otherUsers.add(usersx);
+		}
+		usersService.saveAllUsers(otherUsers);
+
+		// Création d'un administrateur
+		Users usersAdmin = new Users();
+		usersAdmin.setActive(Boolean.TRUE);
+		usersAdmin.setFirstName("Michael");
+		usersAdmin.setLastName("Brown");
+		usersAdmin.setEmail("michael.brown@aol.com");
+		usersAdmin.setUsername("michael.brown");
+		usersAdmin.setPassword("password");
+		usersAdmin.setRole("admin");
+		usersService.saveUsers(usersAdmin);
+
 		// Création d'un cours
 		Course course = new Course();
 		course.setCourseName("Mathématiques");

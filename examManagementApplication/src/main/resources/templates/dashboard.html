@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:if="${#strings.equals(users.role, 'teacher')}">Tableau de bord - Professeur</title>
     <title th:if="${#strings.equals(users.role, 'student')}">Tableau de bord - Étudiant</title>
+    <title th:if="${#strings.equals(users.role, 'admin')}">Tableau de bord - Administrateur</title>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Lien vers le fichier CSS personnalisé -->
@@ -12,29 +13,22 @@
     <!-- Lien vers Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <!-- Fichier des locales -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/locales-all.global.min.js"></script>
 </head>
 <body>
-<div class="dashboard-container d-flex">
-    <!-- Sidebar -->
-    <aside class="sidebar bg-dark text-white p-4">
-        <h2 class="mb-4">Menu</h2>
-        <ul class="list-unstyled">
-            <li><a href="./dashboard" class="text-white text-decoration-none">Accueil</a></li>
-            <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/courses" class="text-white text-decoration-none">Les cours</a></li>
-            <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/exams" class="text-white text-decoration-none">Mes examens</a></li>
-            <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/missing" class="text-white text-decoration-none">Évaluations</a></li>
-            <li><a href="/missing" class="text-white text-decoration-none">Paramètres</a></li>
-        </ul>
-    </aside>
+<div class="dashboard-container d-flex" style="min-height: 100vh;">
+    <!-- Menu -->
+    <th:block th:include="fragments/common.html :: menu"/>
 
     <!-- Content -->
     <main class="content flex-grow-1 p-5">
         <h1 class="mb-4" th:if="${#strings.equals(users.role, 'teacher')}">Espace enseignant</h1>
         <h1 class="mb-4" th:if="${#strings.equals(users.role, 'student')}">Espace étudiant</h1>
-        <h3 class="row">
-            <span class="col-sm-11">Connecté en tant que</span>
-            <a class="btn btn-danger col-sm-1" href="/logout"> Déconnexion</a>
-        </h3>
+        <h1 class="mb-4" th:if="${#strings.equals(users.role, 'admin')}">Espace administrateur</h1>
+        <h3 class="row"><span>Connecté en tant que</span></h3>
         <div class="row">
             <span class="text-primary col-sm-12" th:text="${users.firstName + '&nbsp;' + users.lastName}" style="font-size: 25px; font-weight: bold"></span>
             <span class="col-sm-12" style="font-size: 15px;">
@@ -44,7 +38,7 @@
 
         <hr/>
 
-        <!-- Tableau de bord Enseignant-->
+        <!-- Tableau de bord Enseignant -->
         <th:block th:if="${#strings.equals(users.role, 'teacher')}">
             <section class="stats row g-4">
                 <div class="col-sm-6">
@@ -85,6 +79,7 @@
             </section>
         </th:block>
 
+        <!-- Tableau de bord étudiant -->
         <th:block th:if="${#strings.equals(users.role, 'student')}">
             <input type="hidden" id="userId" th:value="${users.user_id}"/>
             <h3>Liste de mes examens</h3>
@@ -100,12 +95,43 @@
                 <!-- le tbody sera rempli par l'api REST depuis l'appel ajax en JS -->
                 </tbody>
             </table>
+            <!-- Calendrier des examens -->
+            <div id="calendar" style="margin-top: 30px;"></div>
+        </th:block>
+
+        <!-- Tableau de bord Admin -->
+        <th:block th:if="${#strings.equals(users.role, 'admin')}">
+
+            <div class="card mb-3">
+                <div class="card-header bg-dark text-white">Audit et Logs</div>
+                <div class="card-body">
+                    <p>Consultez et filtrez les logs du système pour analyser l’activité de la plateforme.</p>
+                    <ul>
+                        <li>Filtrer par date et heure</li>
+                        <li>Recherche par type de log (erreur, info, avertissement)</li>
+                        <li>Export des logs au format CSV</li>
+                    </ul>
+                    <a href="/admin/logs" class="btn btn-primary">Accéder aux logs</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-dark text-white">Configuration avancée</div>
+                <div class="card-body">
+                    <p>Ajustez les paramètres globaux de la plateforme :</p>
+                    <ul>
+                        <li>Horaires de maintenance</li>
+                        <li>Personnalisation de l’interface (thèmes, logos)</li>
+                        <li>Gestion des notifications système</li>
+                    </ul>
+                    <a href="/admin/config" class="btn btn-primary">Ouvrir la configuration</a>
+                </div>
+            </div>
         </th:block>
 
         <br/>
         <br/>
         <h1>Classements de l'école</h1>
-        <p>Ces graphiques sont donnés à titre d'illustration.</p>
         <hr/>
         <!-- Statistiques -->
         <section class="stats row g-4">
@@ -131,7 +157,8 @@
 
         <!-- Graphique -->
         <section class="chart mt-5">
-            <h2 class="mb-4">Progression des étudiants</h2>
+            <h2 class="mb-4">Taux de réussite de l'établissement</h2>
+            <p>Ces graphiques sont donnés à titre d'illustration.</p>
             <canvas id="progressChart"></canvas>
         </section>
 
@@ -146,9 +173,9 @@
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Étudiant A', 'Étudiant B', 'Étudiant C', 'Étudiant D'],
+            labels: ['Année 2021', 'Année 2022', 'Année 2023', 'Année 2024'],
             datasets: [{
-                label: 'Moyenne (%)',
+                label: 'Réussite globale (%)',
                 data: [85, 78, 92, 74],
                 backgroundColor: 'rgba(54, 162, 235, 0.6)',
                 borderColor: 'rgba(54, 162, 235, 1)',
@@ -217,7 +244,6 @@
                 } else {
                     tableContent = '<tr><td colspan="3">Aucun examen trouvé</td></tr>';
                 }
-                // Assurez-vous que le sélecteur cible bien l'élément avec l'id "loadStudentExams"
                 $('#loadStudentExams').html(tableContent);
             },
             error: function () {
@@ -226,6 +252,48 @@
             }
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Initialisation du calendrier uniquement pour les étudiants
+    if(document.getElementById('calendar')){
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            height: 'auto',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            buttonText: {
+                today: "Aujourd'hui",
+                month: "Mois",
+                week: "Semaine",
+                day: "Jour"
+              },
+            events: [
+                {
+                    title: "Examen Mathématiques - Salle 101",
+                    start: "2025-03-25T09:00:00",
+                    end: "2025-03-25T11:00:00"
+                },
+                {
+                    title: "Examen Français - Salle 202",
+                    start: "2025-03-26T14:00:00",
+                    end: "2025-03-26T16:00:00"
+                },
+                {
+                    title: "Examen Histoire - Salle 303",
+                    start: "2025-03-27T10:00:00",
+                    end: "2025-03-27T12:00:00"
+                }
+            ]
+        });
+        calendar.render();
+    }
+});
+
 
 
 

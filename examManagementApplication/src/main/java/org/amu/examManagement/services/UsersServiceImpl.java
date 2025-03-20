@@ -27,6 +27,12 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    @Transactional
+    public void saveAllUsers(List<Users> allUsers) {
+        usersRepository.saveAll(allUsers);
+    }
+
+    @Override
     public List<Users> getAllUsersWithRole(String role) {
         return usersRepository.findAllUsersWithRole(role);
     }

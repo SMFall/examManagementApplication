@@ -9,36 +9,42 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-<div class="container mt-4">
-    <h1>Liste des cours</h1>
-    <a class="btn btn-primary mb-3" th:href="@{/courses/add}">Ajouter un cours</a>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom du cours</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="course : ${courses}">
-            <td th:text="${course.id}"></td>
-            <td th:text="${course.courseName}"></td>
-            <td th:text="${course.courseDescription}"></td>
-            <td>
-                <a class="btn btn-warning btn-sm"
-                   th:href="@{'/courses/edit/' + ${course.id}}">Modifier</a>
-                <a class="btn btn-danger btn-sm"
-                   th:href="@{'/courses/delete/' + ${course.id}}"
-                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cours ?');">
-                    Supprimer
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="dashboard-container d-flex" style="min-height: 100vh;">
+    <!-- Menu -->
+    <th:block th:include="fragments/common.html :: menu"/>
+
+    <div class="container mt-4">
+        <h1>Liste des cours</h1>
+        <a class="btn btn-primary mb-3" th:href="@{/courses/add}">Ajouter un cours</a>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom du cours</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.courseName}"></td>
+                <td th:text="${course.courseDescription}"></td>
+                <td>
+                    <a class="btn btn-warning btn-sm"
+                       th:href="@{'/courses/edit/' + ${course.id}}">Modifier</a>
+                    <a class="btn btn-danger btn-sm"
+                       th:href="@{'/courses/delete/' + ${course.id}}"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cours ?');">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Bootstrap JS -->

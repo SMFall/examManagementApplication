@@ -1,0 +1,19 @@
+<html>
+    <head></head>
+    <body>
+    <!-- Sidebar -->
+    <div class="dashboard-container d-flex min-height: 100vh;" th:fragment="menu">
+        <aside class="sidebar bg-dark text-white p-4">
+            <h2 class="mb-4">Menu</h2>
+            <ul class="list-unstyled">
+                <li><a th:href="${'/users/' + users.getUser_id() + '/dashboard'}" class="text-white text-decoration-none">Accueil</a></li>
+                <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/courses" class="text-white text-decoration-none">Gérer les cours</a></li>
+                <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/exams" class="text-white text-decoration-none">Gérer les examens</a></li>
+                <li th:if="${#strings.equals(users.role, 'teacher')}"><a href="/mails" class="text-white text-decoration-none">Messagerie</a></li>
+                <li><a href="/settings" class="text-white text-decoration-none">Paramètres</a></li>
+            </ul>
+            <a class="btn btn-danger col-sm-12" href="/logout"> Déconnexion</a>
+        </aside>
+    </div>
+    </body>
+</html>

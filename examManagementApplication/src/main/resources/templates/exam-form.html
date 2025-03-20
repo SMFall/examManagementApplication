@@ -10,45 +10,50 @@
 </head>
 <body>
 
-<div class="container mt-4">
-    <h1 th:text="${exam.id != null} ? 'Modifier Examen' : 'Créer un Examen'"></h1>
+<div class="dashboard-container d-flex" style="min-height: 100vh;">
+    <!-- Menu -->
+    <th:block th:include="fragments/common.html :: menu"/>
 
-    <!-- Formulaire d'ajout/modification -->
-    <form th:action="${exam.id != null} ? @{/exams/update/{id}(id=${exam.id})} : @{/exams}"
-          th:object="${exam}"
-          method="post">
+    <div class="container mt-4">
+        <h1 th:text="${exam.id != null} ? 'Modifier Examen' : 'Créer un Examen'"></h1>
 
-        <!-- Titre de l'examen -->
-        <div class="mb-3">
-            <label for="examTitle" class="form-label">Titre de l'examen</label>
-            <input type="text" th:field="*{examTitle}" class="form-control" id="examTitle" required/>
-        </div>
+        <!-- Formulaire d'ajout/modification -->
+        <form th:action="${exam.id != null} ? @{/exams/update/{id}(id=${exam.id})} : @{/exams}"
+              th:object="${exam}"
+              method="post">
 
-        <!-- Date de l'examen -->
-        <div class="mb-3">
-            <label for="examDate" class="form-label">Date de l'examen</label>
-            <input type="date" th:field="*{examDate}" class="form-control" id="examDate" required/>
-        </div>
+            <!-- Titre de l'examen -->
+            <div class="mb-3">
+                <label for="examTitle" class="form-label">Titre de l'examen</label>
+                <input type="text" th:field="*{examTitle}" class="form-control" id="examTitle" required/>
+            </div>
 
-        <!-- Choix du cours (optionnel) -->
-        <div class="mb-3">
-            <label for="courseId" class="form-label">Cours</label>
-            <select class="form-select" id="courseId" name="courseId">
-                <option value="">-- Sélectionnez un cours --</option>
-                <option th:each="c : ${courses}"
-                        th:value="${c.id}"
-                        th:text="${c.courseName}"
-                        th:selected="${exam.course != null} ? ${c.id} == ${exam.course.id} : false">
-                </option>
-            </select>
-        </div>
+            <!-- Date de l'examen -->
+            <div class="mb-3">
+                <label for="examDate" class="form-label">Date de l'examen</label>
+                <input type="date" th:field="*{examDate}" class="form-control" id="examDate" required/>
+            </div>
 
-        <!-- Boutons -->
-        <button type="submit" class="btn btn-success">
-            <span th:text="${exam.id != null} ? 'Mettre à jour' : 'Enregistrer'"></span>
-        </button>
-        <a class="btn btn-secondary" th:href="@{/exams}">Annuler</a>
-    </form>
+            <!-- Choix du cours -->
+            <div class="mb-3">
+                <label for="courseId" class="form-label">Cours</label>
+                <select class="form-select" id="courseId" name="courseId" required>
+                    <option value="">-- Sélectionnez un cours --</option>
+                    <option th:each="c : ${courses}"
+                            th:value="${c.id}"
+                            th:text="${c.courseName}"
+                            th:selected="${exam.course != null} ? ${c.id} == ${exam.course.id} : false">
+                    </option>
+                </select>
+            </div>
+
+            <!-- Boutons -->
+            <button type="submit" class="btn btn-success">
+                <span th:text="${exam.id != null} ? 'Mettre à jour' : 'Enregistrer'"></span>
+            </button>
+            <a class="btn btn-secondary" th:href="@{/exams}">Annuler</a>
+        </form>
+    </div>
 </div>
 
 <!-- Bootstrap JS -->

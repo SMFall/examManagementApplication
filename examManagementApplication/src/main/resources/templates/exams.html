@@ -10,43 +10,48 @@
 </head>
 <body>
 
-<div class="container mt-4">
+<div class="dashboard-container d-flex" style="min-height: 100vh;">
+    <!-- Menu -->
+    <th:block th:include="fragments/common.html :: menu"/>
 
-    <h1>Liste des examens</h1>
-    <a class="btn btn-primary mb-3" th:href="@{/exams/add}">Ajouter un examen</a>
+    <div class="container mt-4">
 
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th>Identifiant</th>
-            <th>Titre</th>
-            <th>Date</th>
-            <th>Cours</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="exam : ${exams}">
-            <td th:text="${exam.id}"></td>
-            <td th:text="${exam.examTitle}"></td>
-            <td th:text="${exam.examDate}"></td>
-            <td th:text="${exam.course != null ? exam.course.courseName : '---'}"></td>
-            <td>
-                <!-- Lien vers le formulaire d'édition -->
-                <a class="btn btn-warning btn-sm"
-                   th:href="@{'/exams/edit/' + ${exam.id}}">Modifier</a>
+        <h1>Liste des examens</h1>
+        <a class="btn btn-primary mb-3" th:href="@{/exams/add}">Ajouter un examen</a>
 
-                <!-- Lien vers la suppression -->
-                <a class="btn btn-danger btn-sm"
-                   th:href="@{'/exams/delete/' + ${exam.id}}"
-                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet examen ?');">
-                    Supprimer
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Cours</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="exam : ${exams}">
+                <td th:text="${exam.id}"></td>
+                <td th:text="${exam.examTitle}"></td>
+                <td th:text="${exam.examDate}"></td>
+                <td th:text="${exam.course != null ? exam.course.courseName : '---'}"></td>
+                <td>
+                    <!-- Lien vers le formulaire d'édition -->
+                    <a class="btn btn-warning btn-sm"
+                       th:href="@{'/exams/edit/' + ${exam.id}}">Modifier</a>
 
+                    <!-- Lien vers la suppression -->
+                    <a class="btn btn-danger btn-sm"
+                       th:href="@{'/exams/delete/' + ${exam.id}}"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet examen ?');">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
 </div>
 
 <!-- Bootstrap JS -->

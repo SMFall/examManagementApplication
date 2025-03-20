@@ -52,6 +52,10 @@ public class MainController {
             // On récupère les exams
             List<Exam> exams = examService.getExamsByTeacherId(loggedUser.getUser_id());
             model.addAttribute("exams", exams);
+
+            // On récupère l'enseignant dont l'identifiant correspond au paramètre
+            model.addAttribute("users", loggedUser);
+
             return "exams";
         } else {
             return "redirect:/error";
@@ -60,7 +64,7 @@ public class MainController {
 
     // Afficher le formulaire pour ajouter un nouvel examen
     @GetMapping("/exams/add")
-    public String showAddExamForm(Model model) {
+    public String showAddExamForm(Model model, HttpSession session) {
 
         model.addAttribute("exam", new Exam());
 
@@ -69,7 +73,46 @@ public class MainController {
         model.addAttribute("courses", courses);
         model.addAttribute("teachers", teachers);
 
+        // On récupère l'enseignant dont l'identifiant correspond au paramètre
+        Users loggedUser = (Users) session.getAttribute("loggedUser");
+        model.addAttribute("users", loggedUser);
+
         return "exam-form";
+    }
+
+    // Afficher le formulaire d'édition d'un examen
+    @GetMapping("/exams/edit/{id}")
+    public String showEditExamForm(@PathVariable("id") Long id, Model model, HttpSession session) {
+        Optional<Exam> examOpt = examService.getExamById(id);
+        if(examOpt.isPresent()) {
+            Exam exam = examOpt.get();
+            model.addAttribute("exam", exam);
+
+            List<Course> courses = courseService.getAllCourses();
+            List<Users> teachers = usersService.getAllUsersWithRole("teacher");
+            model.addAttribute("courses", courses);
+            model.addAttribute("teachers", teachers);
+
+            // On récupère l'enseignant dont l'identifiant correspond au paramètre
+            Users loggedUser = (Users) session.getAttribute("loggedUser");
+            model.addAttribute("users", loggedUser);
+
+            return "exam-form";
+        } else {
+            return "redirect:/error";
+        }
+    }
+
+    // Supprimer un examen
+    @GetMapping("/exams/delete/{id}")
+    public String deleteExam(@PathVariable("id") Long id, HttpSession session, Model model) {
+        examService.deleteExam(id);
+
+        // On récupère l'enseignant dont l'identifiant correspond au paramètre
+        Users loggedUser = (Users) session.getAttribute("loggedUser");
+        model.addAttribute("users", loggedUser);
+
+        return "redirect:/exams";
     }
 
     // Enregistrer un nouvel examen
@@ -97,25 +140,6 @@ public class MainController {
         // On enregistre l'examen
         examService.saveExam(exam);
         return "redirect:/exams";
-    }
-
-    // Afficher le formulaire d'édition d'un examen
-    @GetMapping("/exams/edit/{id}")
-    public String showEditExamForm(@PathVariable("id") Long id, Model model) {
-        Optional<Exam> examOpt = examService.getExamById(id);
-        if(examOpt.isPresent()) {
-            Exam exam = examOpt.get();
-            model.addAttribute("exam", exam);
-
-            List<Course> courses = courseService.getAllCourses();
-            List<Users> teachers = usersService.getAllUsersWithRole("teacher");
-            model.addAttribute("courses", courses);
-            model.addAttribute("teachers", teachers);
-
-            return "exam-form";
-        } else {
-            return "redirect:/error";
-        }
     }
 
     // Mettre à jour un examen
@@ -151,29 +175,61 @@ public class MainController {
         }
     }
 
-    // Supprimer un examen
-    @GetMapping("/exams/delete/{id}")
-    public String deleteExam(@PathVariable("id") Long id) {
-        examService.deleteExam(id);
-        return "redirect:/exams";
-    }
-
     // ==================================
     //         COURS (COURSE) CRUD
     // ==================================
 
     @GetMapping("/courses")
-    public String showCoursesList(Model model) {
+    public String showCoursesList(Model model, HttpSession session) {
         List<Course> courses = courseService.getAllCourses();
         model.addAttribute("courses", courses);
+
+        // On récupère l'enseignant dont l'identifiant correspond au paramètre
+        Users loggedUser = (Users) session.getAttribute("loggedUser");
+        model.addAttribute("users", loggedUser);
+
         return "courses";
     }
 
     // Afficher le formulaire pour ajouter un nouveau cours
     @GetMapping("/courses/add")
-    public String showAddCourseForm(Model model) {
+    public String showAddCourseForm(Model model, HttpSession session) {
         model.addAttribute("course", new Course());
+
+        // On récupère l'enseignant dont l'identifiant correspond au paramètre
+        Users loggedUser = (Users) session.getAttribute("loggedUser");
+        model.addAttribute("users", loggedUser);
+
         return "course-form";
+    }
+
+    // Afficher le formulaire d'édition d'un cours
+    @GetMapping("/courses/edit/{id}")
+    public String showEditCourseForm(@PathVariable("id") Long id, Model model, HttpSession session) {
+        Optional<Course> courseOpt = courseService.getCourseById(id);
+        if(courseOpt.isPresent()) {
+            model.addAttribute("course", courseOpt.get());
+
+            // On récupère l'enseignant dont l'identifiant correspond au paramètre
+            Users loggedUser = (Users) session.getAttribute("loggedUser");
+            model.addAttribute("users", loggedUser);
+
+            return "course-form";
+        } else {
+            return "redirect:/error";
+        }
+    }
+
+    // Supprimer un cours
+    @GetMapping("/courses/delete/{id}")
+    public String deleteCourse(@PathVariable("id") Long id, HttpSession session, Model model) {
+        courseService.deleteCourse(id);
+
+        // On récupère l'enseignant dont l'identifiant correspond au paramètre
+        Users loggedUser = (Users) session.getAttribute("loggedUser");
+        model.addAttribute("users", loggedUser);
+
+        return "redirect:/courses";
     }
 
     // Enregistrer un nouveau cours
@@ -181,18 +237,6 @@ public class MainController {
     public String createCourse(@ModelAttribute("course") Course course) {
         courseService.saveCourse(course);
         return "redirect:/courses";
-    }
-
-    // Afficher le formulaire d'édition d'un cours
-    @GetMapping("/courses/edit/{id}")
-    public String showEditCourseForm(@PathVariable("id") Long id, Model model) {
-        Optional<Course> courseOpt = courseService.getCourseById(id);
-        if(courseOpt.isPresent()) {
-            model.addAttribute("course", courseOpt.get());
-            return "course-form";
-        } else {
-            return "redirect:/error";
-        }
     }
 
     // Mettre à jour un cours
@@ -203,12 +247,9 @@ public class MainController {
         return "redirect:/courses";
     }
 
-    // Supprimer un cours
-    @GetMapping("/courses/delete/{id}")
-    public String deleteCourse(@PathVariable("id") Long id) {
-        courseService.deleteCourse(id);
-        return "redirect:/courses";
-    }
+    // ==================================
+    //         PAGE D'ACCUEIL
+    // ==================================
 
     // Affiche la page d'accueil
     @GetMapping("/")
@@ -258,6 +299,10 @@ public class MainController {
             return "redirect:/error";
         }
     }
+
+    // ==================================
+    //         ERREUR 404
+    // ==================================
 
     // Affiche la page 404
     @GetMapping("/error")
