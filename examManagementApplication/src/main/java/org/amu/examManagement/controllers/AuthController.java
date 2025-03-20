@@ -42,12 +42,12 @@ public class AuthController {
                 return "redirect:/users/" + user.getUser_id() + "/dashboard";
             } else {
                 // Mauvais mot de passe
-                model.addAttribute("error", "Utilisateur inconnu ou Mot de passe incorrect");
+                model.addAttribute("error", "Utilisateur inconnu ou mot de passe incorrect");
                 return "login";
             }
         } else {
             // Utilisateur non trouvé
-            model.addAttribute("error", "Utilisateur inconnu ou Mot de passe incorrect");
+            model.addAttribute("error", "Utilisateur inconnu ou mot de passe incorrect");
             return "login";
         }
     }

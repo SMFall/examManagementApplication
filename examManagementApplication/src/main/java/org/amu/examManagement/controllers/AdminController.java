@@ -47,14 +47,12 @@ public class AdminController {
         }
 
         if ("admin".equals(loggedUser.getRole())) {
-            // On récupère les utilisateurs
-            List<Exam> exams = examService.getAllExams();
-            model.addAttribute("exams", exams);
-
-            // On récupère l'enseignant dont l'identifiant correspond au paramètre
+            // On récupère tous les utilisateurs de l'application
+            List<Users> allUsers = usersService.getAllUsers();
+            model.addAttribute("allUsers", allUsers);
             model.addAttribute("users", loggedUser);
 
-            return "exams";
+            return "users";
         } else {
             return "redirect:/error";
         }
@@ -62,40 +60,31 @@ public class AdminController {
 
     // Afficher le formulaire pour ajouter un nouvel utilisateur
     @GetMapping("/users/add")
-    public String showAddExamForm(Model model, HttpSession session) {
-
-        model.addAttribute("exam", new Exam());
-
-        List<Course> courses = courseService.getAllCourses();
-        List<Users> teachers = usersService.getAllUsersWithRole("teacher");
-        model.addAttribute("courses", courses);
-        model.addAttribute("teachers", teachers);
+    public String showAddUsersForm(Model model, HttpSession session) {
 
         // On récupère l'enseignant dont l'identifiant correspond au paramètre
         Users loggedUser = (Users) session.getAttribute("loggedUser");
         model.addAttribute("users", loggedUser);
 
-        return "exam-form";
+        Users editedUser = new Users();
+        model.addAttribute("editedUser", editedUser);
+
+        return "users-form";
     }
 
-    // Afficher le formulaire d'édition d'un utilisateurs
+    // Afficher le formulaire d'édition d'un utilisateur
     @GetMapping("/users/edit/{id}")
-    public String showEditExamForm(@PathVariable("id") Long id, Model model, HttpSession session) {
-        Optional<Exam> examOpt = examService.getExamById(id);
-        if(examOpt.isPresent()) {
-            Exam exam = examOpt.get();
-            model.addAttribute("exam", exam);
-
-            List<Course> courses = courseService.getAllCourses();
-            List<Users> teachers = usersService.getAllUsersWithRole("teacher");
-            model.addAttribute("courses", courses);
-            model.addAttribute("teachers", teachers);
+    public String showEditUsersForm(@PathVariable("id") Long id, Model model, HttpSession session) {
+        Optional<Users> usersOpt = usersService.getUsers(id);
+        if(usersOpt.isPresent()) {
+            Users users = usersOpt.get();
+            model.addAttribute("editedUser", users);
 
             // On récupère l'enseignant dont l'identifiant correspond au paramètre
             Users loggedUser = (Users) session.getAttribute("loggedUser");
             model.addAttribute("users", loggedUser);
 
-            return "exam-form";
+            return "users-form";
         } else {
             return "redirect:/error";
         }
@@ -103,19 +92,20 @@ public class AdminController {
 
     // Supprimer un examen
     @GetMapping("/users/delete/{id}")
-    public String deleteExam(@PathVariable("id") Long id, HttpSession session, Model model) {
-        examService.deleteExam(id);
+    public String deleteUsers(@PathVariable("id") Long id, HttpSession session, Model model) {
+
+        usersService.deleteUsers(id);
 
         // On récupère l'enseignant dont l'identifiant correspond au paramètre
         Users loggedUser = (Users) session.getAttribute("loggedUser");
         model.addAttribute("users", loggedUser);
 
-        return "redirect:/exams";
+        return "redirect:/users";
     }
 
     // Enregistrer un nouvel examen
     @PostMapping("/users")
-    public String createExam(@ModelAttribute("exam") Exam exam,
+    public String createUsers(@ModelAttribute("editedUsers") Users editedUsers,
                              @RequestParam(name = "courseId", required = false) Long courseId,
                              HttpSession session) {
 
@@ -126,46 +116,28 @@ public class AdminController {
             return "redirect:/login";
         }
 
-        // On assigne cet enseignant à l'examen
-        exam.setUsers(loggedUser);
-
-        // On vérifie si un cours a été sélectionné
-        if (courseId != null) {
-            Optional<Course> courseOpt = courseService.getCourseById(courseId);
-            courseOpt.ifPresent(exam::setCourse);
-        }
-
-        // On enregistre l'examen
-        examService.saveExam(exam);
+        // On enregistre l'utilisateur
+        usersService.saveUsers(editedUsers);
         return "redirect:/users";
     }
 
-    // Mettre à jour un examen
+    // Mettre à jour un utilisateur
     @PostMapping("/users/update/{id}")
-    public String updateExam(@PathVariable("id") Long id,
-                             @ModelAttribute("exam") Exam examForm,
-                             @RequestParam(name = "courseId", required = false) Long courseId,
-                             @RequestParam(name = "teacherId", required = false) Long teacherId) {
+    public String updateUsers(@PathVariable("id") Long id,
+                             @ModelAttribute("editedUsers") Users editedUsers) {
+
         // On va chercher l'examen existant pour le mettre à jour
-        Optional<Exam> examOpt = examService.getExamById(id);
-        if(examOpt.isPresent()) {
-            Exam examToUpdate = examOpt.get();
-            examToUpdate.setExamTitle(examForm.getExamTitle());
-            examToUpdate.setExamDate(examForm.getExamDate());
+        Optional<Users> usersOpt = usersService.getUsers(id);
+        if(usersOpt.isPresent()) {
+            Users usersToUpdate = usersOpt.get();
+            usersToUpdate.setFirstName(editedUsers.getFirstName());
+            usersToUpdate.setLastName(editedUsers.getLastName());
+            usersToUpdate.setEmail(editedUsers.getEmail());
+            usersToUpdate.setUsername(editedUsers.getUsername());
+            usersToUpdate.setPassword(editedUsers.getPassword());
+            usersToUpdate.setRole(editedUsers.getRole());
 
-            // On set le course
-            if(courseId != null) {
-                Optional<Course> courseOpt = courseService.getCourseById(courseId);
-                courseOpt.ifPresent(examToUpdate::setCourse);
-            }
-
-            // On set l'enseignant
-            if(teacherId != null) {
-                Optional<Users> teacherOpt = usersService.getUsers(teacherId);
-                teacherOpt.ifPresent(examToUpdate::setUsers);
-            }
-
-            examService.saveExam(examToUpdate);
+            usersService.saveUsers(usersToUpdate);
 
             return "redirect:/users";
         } else {

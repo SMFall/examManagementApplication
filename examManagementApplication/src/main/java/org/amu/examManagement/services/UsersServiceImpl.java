@@ -21,6 +21,11 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public List<Users> getAllUsers() {
+        return usersRepository.findAll();
+    }
+
+    @Override
     @Transactional
     public void saveUsers(Users users) {
         usersRepository.save(users);
@@ -40,5 +45,10 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Optional<Users> findByUsername(String username) {
         return usersRepository.findByUsername(username);
+    }
+
+    @Override
+    public void deleteUsers(Long id) {
+        usersRepository.deleteById(id);
     }
 }
