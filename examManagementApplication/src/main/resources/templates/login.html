@@ -15,6 +15,15 @@
     <!-- Afficher l'erreur si présente -->
     <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 
+    <div class="row" style="margin-top: 100px;">
+        <h5 class="text-primary">Ceci est un environnement de démonstration</h5>
+        <p>Pour se connecter en tant qu'administrateur, utiliser l'identifiant <strong>michael.brown</strong> et le mot de passe <strong>password</strong><br/>
+            Pour se connecter en tant qu'enseignant, utiliser l'identifiant <strong>david.doe</strong> et le mot de passe <strong>password</strong><br/>
+            Pour se connecter en tant qu'étudiant, utiliser l'identifiant <strong>alice.smith</strong> et le mot de passe <strong>password</strong></p>
+    </div>
+
+    <br/>
+
     <form th:action="@{/login}" method="post">
         <div class="mb-3">
             <label for="username" class="form-label">Nom d'utilisateur</label>
@@ -28,13 +37,6 @@
         <button type="submit" class="btn btn-primary">Se connecter</button>
         <a href="/" class="btn btn-secondary">Retour à l'accueil</a>
     </form>
-
-    <div class="row" style="margin-top: 100px;">
-        <h5 class="text-primary">Ceci est un environnement de démonstration</h5>
-        <p>Pour se connecter en tant qu'administrateur, utiliser l'identifiant <strong>michael.brown</strong> et le mot de passe <strong>password</strong><br/>
-        Pour se connecter en tant qu'enseignant, utiliser l'identifiant <strong>david.doe</strong> et le mot de passe <strong>password</strong><br/>
-        Pour se connecter en tant qu'étudiant, utiliser l'identifiant <strong>alice.smith</strong> et le mot de passe <strong>password</strong></p>
-    </div>
 
 </div>
 </body>

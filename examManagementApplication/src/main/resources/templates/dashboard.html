@@ -39,7 +39,7 @@
         <hr/>
 
         <!-- Tableau de bord Enseignant -->
-        <th:block th:if="${#strings.equals(users.role, 'teacher')}">
+        <th:block th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}">
             <section class="stats row g-4">
                 <div class="col-sm-6">
                     <h2>Liste des quiz</h2>
@@ -99,34 +99,65 @@
             <div id="calendar" style="margin-top: 30px;"></div>
         </th:block>
 
-        <!-- Tableau de bord Admin -->
+        <br/>
+
+        <!-- Tableau de bord Administrateur -->
         <th:block th:if="${#strings.equals(users.role, 'admin')}">
 
-            <div class="card mb-3">
-                <div class="card-header bg-dark text-white">Audit et Logs</div>
-                <div class="card-body">
-                    <p>Consultez et filtrez les logs du système pour analyser l’activité de la plateforme.</p>
-                    <ul>
-                        <li>Filtrer par date et heure</li>
-                        <li>Recherche par type de log (erreur, info, avertissement)</li>
-                        <li>Export des logs au format CSV</li>
-                    </ul>
-                    <a href="/admin/logs" class="btn btn-primary">Accéder aux logs</a>
+            <h3>Chiffres importants</h3>
+
+            <div class="row g-4">
+                <!-- KPI 1 : Nouveaux inscrits -->
+                <div class="col-md-3">
+                    <div class="card text-white bg-primary">
+                        <div class="card-header">Nouveaux inscrits ce mois</div>
+                        <div class="card-body">
+                            <h5 class="card-title">+42</h5>
+                            <p class="card-text">Étudiants supplémentaires par rapport au mois précédent</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 2 : Taux de réussite global -->
+                <div class="col-md-3">
+                    <div class="card text-white bg-success">
+                        <div class="card-header">Taux de réussite</div>
+                        <div class="card-body">
+                            <h5 class="card-title">88%</h5>
+                            <p class="card-text">Sur l’ensemble des examens passés ce semestre</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 3 : Examens planifiés -->
+                <div class="col-md-3">
+                    <div class="card text-white bg-warning">
+                        <div class="card-header">Examens planifiés</div>
+                        <div class="card-body">
+                            <h5 class="card-title">12</h5>
+                            <p class="card-text">Examens prévus d’ici la fin du mois</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 4 : Taux d'absentéisme -->
+                <div class="col-md-3">
+                    <div class="card text-white bg-info">
+                        <div class="card-header">Taux d'absentéisme</div>
+                        <div class="card-body">
+                            <h5 class="card-title">7%</h5>
+                            <p class="card-text">Absences constatées la semaine dernière</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header bg-dark text-white">Configuration avancée</div>
-                <div class="card-body">
-                    <p>Ajustez les paramètres globaux de la plateforme :</p>
-                    <ul>
-                        <li>Horaires de maintenance</li>
-                        <li>Personnalisation de l’interface (thèmes, logos)</li>
-                        <li>Gestion des notifications système</li>
-                    </ul>
-                    <a href="/admin/config" class="btn btn-primary">Ouvrir la configuration</a>
-                </div>
+            <!-- Section d'évolution des inscriptions (graphique fictif) -->
+            <div class="mt-5">
+                <h3>Évolution des inscriptions</h3>
+                <canvas id="enrollmentChart"></canvas>
             </div>
+
         </th:block>
 
         <br/>
@@ -291,7 +322,29 @@
             ]
         });
         calendar.render();
-    }
+    };
+
+    var ctxEnrollment = document.getElementById('enrollmentChart');
+        if(ctxEnrollment) {
+            new Chart(ctxEnrollment, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai'],
+                    datasets: [{
+                        label: 'Inscriptions',
+                        data: [30, 45, 42, 50, 60], // données fictives
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
 });
 
 
