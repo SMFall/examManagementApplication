@@ -6,12 +6,12 @@
         <aside class="sidebar bg-dark text-white p-4">
             <h2 class="mb-4">Menu</h2>
             <ul class="list-unstyled">
-                <li><a th:href="${'/users/' + users.getUser_id() + '/dashboard'}" class="text-white text-decoration-none">Accueil</a></li>
-                <li th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/courses" class="text-white text-decoration-none">Cours</a></li>
-                <li th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/exams" class="text-white text-decoration-none">Examens</a></li>
-                <li th:if="${#strings.equals(users.role, 'admin')}"><a href="/users" class="text-white text-decoration-none">Comptes</a></li>
-                <li><a href="/mails" class="text-white text-decoration-none">Messagerie</a></li>
-                <li><a href="/settings" class="text-white text-decoration-none">Paramètres</a></li>
+                <li style="margin-bottom:10px;"><a th:href="${'/users/' + users.getUser_id() + '/dashboard'}" class="text-white text-decoration-none">Accueil</a><br/></li>
+                <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/courses" class="text-white text-decoration-none">Cours</a><br/></li>
+                <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/exams" class="text-white text-decoration-none">Examens</a><br/></li>
+                <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'admin')}"><a href="/users" class="text-white text-decoration-none">Comptes</a><br/></li>
+                <li style="margin-bottom:10px;"><a href="/mails" class="text-white text-decoration-none">Messages</a><span class="badge badge-danger" style="background-color: #dc3545; border-radius: 50px; margin-left: 10px; margin-top: 0px;">14</span><br/></li>
+                <li style="margin-bottom:10px;"><a href="/settings" class="text-white text-decoration-none">Paramètres</a><br/></li>
             </ul>
             <a class="btn btn-danger col-sm-12" href="/logout"> Déconnexion</a>
         </aside>

@@ -62,7 +62,7 @@ public class AdminController {
     @GetMapping("/users/add")
     public String showAddUsersForm(Model model, HttpSession session) {
 
-        // On récupère l'enseignant dont l'identifiant correspond au paramètre
+        // On récupère l'utilisateur dont l'identifiant correspond au paramètre
         Users loggedUser = (Users) session.getAttribute("loggedUser");
         model.addAttribute("users", loggedUser);
 
@@ -80,7 +80,7 @@ public class AdminController {
             Users users = usersOpt.get();
             model.addAttribute("editedUser", users);
 
-            // On récupère l'enseignant dont l'identifiant correspond au paramètre
+            // On récupère l'utilisateur dont l'identifiant correspond au paramètre
             Users loggedUser = (Users) session.getAttribute("loggedUser");
             model.addAttribute("users", loggedUser);
 
@@ -96,7 +96,7 @@ public class AdminController {
 
         usersService.deleteUsers(id);
 
-        // On récupère l'enseignant dont l'identifiant correspond au paramètre
+        // On récupère l'utilisateur dont l'identifiant correspond au paramètre
         Users loggedUser = (Users) session.getAttribute("loggedUser");
         model.addAttribute("users", loggedUser);
 

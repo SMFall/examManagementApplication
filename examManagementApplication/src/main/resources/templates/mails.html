@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messagerie - Mode Démo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="dashboard-container d-flex" style="min-height: 100vh;">
+    <!-- Menu -->
+    <th:block th:include="fragments/common.html :: menu"/>
+
+    <div class="container my-4">
+        <!-- Message d'information -->
+        <div class="alert alert-warning" role="alert">
+            Cette fonctionnalité n'est pas disponible dans le mode démo de l'application.
+        </div>
+        <h1 class="mb-4">Messagerie interne</h1>
+        <div class="row">
+            <!-- Colonne Liste des mails -->
+            <div class="col-md-6 mb-4">
+                <h3>Liste des mails</h3>
+                <ul class="list-group">
+                    <li class="list-group-item disabled">
+                        <strong>Objet :</strong> Réunion de service<br>
+                        <small>De : directeur@etablissement.fr - 10:30, 20 mars 2025</small>
+                    </li>
+                    <li class="list-group-item disabled">
+                        <strong>Objet :</strong> Informations administratives<br>
+                        <small>De : secretaire@etablissement.fr - 09:15, 19 mars 2025</small>
+                    </li>
+                    <li class="list-group-item disabled">
+                        <strong>Objet :</strong> Annonce de la rentrée<br>
+                        <small>De : direction@etablissement.fr - 14:00, 18 mars 2025</small>
+                    </li>
+                    <li class="list-group-item disabled">
+                        <strong>Objet :</strong> Mise à jour du planning<br>
+                        <small>De : planning@etablissement.fr - 11:00, 21 mars 2025</small>
+                    </li>
+                    <li class="list-group-item disabled">
+                        <strong>Objet :</strong> Invitation au séminaire<br>
+                        <small>De : events@etablissement.fr - 15:30, 21 mars 2025</small>
+                    </li>
+                    <li class="list-group-item disabled">
+                        <strong>Objet :</strong> Rappel de paiement<br>
+                        <small>De : finances@etablissement.fr - 08:45, 20 mars 2025</small>
+                    </li>
+                    <li class="list-group-item disabled">
+                        <strong>Objet :</strong> Mise à jour de la politique de sécurité<br>
+                        <small>De : security@etablissement.fr - 16:00, 19 mars 2025</small>
+                    </li>
+                    <li class="list-group-item disabled">
+                        <strong>Objet :</strong> Retour sur l’événement annuel<br>
+                        <small>De : communication@etablissement.fr - 13:15, 18 mars 2025</small>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Colonne Formulaire de création de mail -->
+            <div class="col-md-6">
+                <h3>Créer un nouveau mail</h3>
+                <form>
+                    <div class="mb-3">
+                        <label for="destinataires" class="form-label">Destinataires</label>
+                        <input type="text" class="form-control" id="destinataires" placeholder="Saisissez les adresses email" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="objet" class="form-label">Objet</label>
+                        <input type="text" class="form-control" id="objet" placeholder="Saisissez l'objet du mail" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Rédigez votre message" disabled></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" disabled>Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle (inclut Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

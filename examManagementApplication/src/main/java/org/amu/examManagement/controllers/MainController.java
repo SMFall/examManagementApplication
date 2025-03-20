@@ -255,13 +255,25 @@ public class MainController {
     }
 
     // ==================================
-    //         PAGE D'ACCUEIL
+    //     VITRINE DE L'APPLICATION
     // ==================================
 
     // Affiche la page d'accueil
     @GetMapping("/")
     public String showHome(Model model) {
         return "homepage";
+    }
+
+    // Affiche la page d'accueil
+    @GetMapping("/features")
+    public String showFeatures(Model model) {
+        return "features";
+    }
+
+    // Affiche la page d'accueil
+    @GetMapping("/contact")
+    public String showContact(Model model) {
+        return "contact";
     }
 
     // Affiche la page tableau de bord
