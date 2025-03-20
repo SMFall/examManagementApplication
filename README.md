@@ -32,7 +32,8 @@ L’objectif principal est de proposer un système centralisé pour :
 
 🔹 Créer, consulter, modifier et supprimer des cours, quiz, examens, utilisateurs 
 
-Le **front-end** est réalisé avec **Thymeleaf** (affichage des pages, formulaires) et le **back-end** avec **Spring Boot** et **Spring Data JPA** pour la persistance. 
+Le **front-end** est réalisé avec **Thymeleaf** (affichage des pages, formulaires) et le **back-end** avec **Spring Boot** et **Spring Data JPA** pour la persistance.
+
 Une **API REST** est également disponible pour permettre des intégrations ou des **appels AJAX** (par exemple, pour récupérer le premier examen d’un enseignant).
 
 ---
