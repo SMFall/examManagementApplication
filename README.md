@@ -160,7 +160,7 @@ Run 'ExamManagementApplication'
 ```
 
 ### Accéder à l’interface
-[http://localhost:8081/h2-console/](http://localhost:8081/)
+[http://localhost:8081/](http://localhost:8081/)
 
 ### Accéder à la gestion de la base de données
 [http://localhost:8081/h2-console/](http://localhost:8081/h2-console/)
