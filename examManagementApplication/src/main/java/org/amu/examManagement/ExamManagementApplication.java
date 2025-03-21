@@ -90,7 +90,7 @@ public class ExamManagementApplication implements CommandLineRunner {
 
 		// Création d'autres étudiants "non actifs"
 		List<Users> otherUsers = new ArrayList<>();
-		for (int i = 0; i < 146; i++) {
+		for (int i = 1; i < 146; i++) {
 			Users usersx = new Users();
 			usersx.setActive(Boolean.FALSE);
 			usersx.setFirstName("Student " + i);
