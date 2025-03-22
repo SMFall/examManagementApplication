@@ -20,7 +20,7 @@ Elle offre à la fois :
 - [🛠️ Modifications et améliorations](#%EF%B8%8F-modifications-et-améliorations)  
 - [🚀 Lancer l’application](#-lancer-lapplication)
 - [🌐 Utiliser l’API REST : exemples d’appels](#-utiliser-lapi-rest--exemples-dappels)
-- [🔑 Gestion des rôles et authentification](#-gestion-auth)
+- [🔑 Gestion des rôles et authentification](#-gestion-des-rôles-et-authentification)
 - [👁️ Observations et points forts](#observations-points-forts)
 
 ---
