@@ -26,6 +26,7 @@
                 <th>ID</th>
                 <th>Nom du cours</th>
                 <th>Description</th>
+                <th style="width: 30%">Étudiants inscrits</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -34,6 +35,12 @@
                 <td th:text="${course.id}"></td>
                 <td th:text="${course.courseName}"></td>
                 <td th:text="${course.courseDescription}"></td>
+                <td th:if="${#lists.isEmpty(course.getUsersListC())}">Aucun étudiant inscrit dans ce cours</td>
+                <td th:if="${not #lists.isEmpty(course.getUsersListC())}">
+                    <ul>
+                        <li th:each="users : ${course.getUsersListC()}" th:text="${users.lastName + ' ' + users.firstName}"></li>
+                    </ul>
+                </td>
                 <td>
                     <a class="btn btn-warning btn-sm"
                        th:href="@{'/courses/edit/' + ${course.id}}">Modifier</a>

@@ -58,7 +58,7 @@ public class ExamManagementApplication implements CommandLineRunner {
 		Users users2 = new Users();
 		users2.setActive(true);
 		users2.setEmail("john.true@yahoo.fr");
-		users2.setPassword("abc123");
+		users2.setPassword("password");
 		users2.setFirstName("John");
 		users2.setLastName("True");
 		users2.setUsername("john.true");
@@ -68,7 +68,7 @@ public class ExamManagementApplication implements CommandLineRunner {
 		Users users3 = new Users();
 		users3.setActive(true);
 		users3.setEmail("bob.low@outlook.com");
-		users3.setPassword("boblow");
+		users3.setPassword("password");
 		users3.setFirstName("Bob");
 		users3.setLastName("Low");
 		users3.setUsername("bob.low");

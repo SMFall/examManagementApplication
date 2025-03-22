@@ -1,15 +1,9 @@
 package org.amu.examManagement.controllers;
 
 import jakarta.servlet.http.HttpSession;
-import org.amu.examManagement.model.Course;
-import org.amu.examManagement.model.Exam;
-import org.amu.examManagement.model.Quiz;
-import org.amu.examManagement.model.Users;
+import org.amu.examManagement.model.*;
 import org.amu.examManagement.repositories.QuizRepository;
-import org.amu.examManagement.services.CourseService;
-import org.amu.examManagement.services.ExamService;
-import org.amu.examManagement.services.QuizService;
-import org.amu.examManagement.services.UsersService;
+import org.amu.examManagement.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +18,7 @@ public class ExamController {
     @Autowired
     private UsersService usersService;
     @Autowired
-    private QuizRepository quizRepository;
-    @Autowired
-    private QuizService quizService;
+    private QuestionService questionService;
     @Autowired
     private ExamService examService;
     @Autowired
@@ -114,13 +106,26 @@ public class ExamController {
     // Supprimer un examen
     @GetMapping("/exams/delete/{id}")
     public String deleteExam(@PathVariable("id") Long id, HttpSession session, Model model) {
-        examService.deleteExam(id);
 
-        // On récupère l'enseignant dont l'identifiant correspond au paramètre
-        Users loggedUser = (Users) session.getAttribute("loggedUser");
-        model.addAttribute("users", loggedUser);
+        Optional<Exam> examOpt = examService.getExamById(id);
+        if(examOpt.isPresent()) {
+            Exam exam = examOpt.get();
+            // On dissocie les questions des examens avant la suppression
+            if (exam.getQuestions() != null) {
+                for (Question question : exam.getQuestions()) {
+                    question.setExam(null);
+                    questionService.saveQuestion(question);
+                }
+            }
+            examService.deleteExam(exam.getId());
+            // On récupère l'enseignant dont l'identifiant correspond au paramètre
+            Users loggedUser = (Users) session.getAttribute("loggedUser");
+            model.addAttribute("users", loggedUser);
 
-        return "redirect:/exams";
+            return "redirect:/exams";
+        } else {
+            return "redirect:/error";
+        }
     }
 
     // Enregistrer un nouvel examen

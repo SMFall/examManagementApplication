@@ -2,10 +2,13 @@ package org.amu.examManagement.services;
 
 import jakarta.transaction.Transactional;
 import org.amu.examManagement.model.Exam;
+import org.amu.examManagement.model.Question;
 import org.amu.examManagement.repositories.ExamRepository;
+import org.amu.examManagement.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +51,7 @@ public class ExamServiceImpl implements ExamService {
     public void deleteExam(Long id) {
         Exam exam = examRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Exam not found for id : " + id));
+
         examRepository.delete(exam);
     }
 

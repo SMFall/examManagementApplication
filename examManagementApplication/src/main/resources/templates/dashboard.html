@@ -89,7 +89,7 @@
             </section>
         </th:block>
 
-        <!-- Tableau de bord étudiant -->
+        <!-- Tableau de bord Étudiant -->
         <th:block th:if="${#strings.equals(users.role, 'student')}">
             <input type="hidden" id="userId" th:value="${users.getUser_id}"/>
             <h3>Liste de mes examens</h3>
@@ -105,7 +105,9 @@
                 <!-- le tbody sera rempli par l'api REST depuis l'appel ajax en JS -->
                 </tbody>
             </table>
+            <br/>
             <!-- Calendrier des examens -->
+            <p>Le calendrier ci-dessous est purement fictif et uniquement donné titre d'illustration.</p>
             <div id="calendar" style="margin-top: 30px; background: ghostwhite"></div>
         </th:block>
 
@@ -115,7 +117,7 @@
         <th:block th:if="${#strings.equals(users.role, 'admin')}">
 
             <h3>Chiffres importants</h3>
-            <p>Ces indicateurs sont donnés à titre d'illustration.</p>
+            <p>Ces indicateurs sont purement fictifs et uniquement donnés à titre d'illustration.</p>
 
             <div class="row g-4">
                 <!-- KPI 1 : Nouveaux inscrits -->
@@ -175,7 +177,7 @@
         <br/>
         <hr/>
         <h1>Classements de l'école</h1>
-        <p>Ces statistiques sont dynamiques et changent en fonction de ce qu'il se passe dans l'application.</p>
+        <p>Ces statistiques sont <strong>dynamiques</strong> et changent en fonction de ce qu'il se passe dans l'application.</p>
         <!-- Statistiques -->
         <section class="stats row g-4">
             <div class="col-md-4">
@@ -201,7 +203,7 @@
         <!-- Graphique -->
         <section class="chart mt-5">
             <h3 class="mb-4">Taux de réussite de l'établissement</h3>
-            <p>Ce graphique est donné à titre d'illustration.</p>
+            <p>Ce graphique est purement fictif et uniquement donné titre d'illustration.</p>
             <canvas id="progressChart"></canvas>
         </section>
 

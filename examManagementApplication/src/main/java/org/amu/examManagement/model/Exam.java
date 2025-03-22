@@ -26,7 +26,7 @@ public class Exam {
     @ManyToMany(fetch=FetchType.EAGER)
     private List<Users> usersListE;
 
-    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "exam", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Question> questions;
 
     public Exam() {}

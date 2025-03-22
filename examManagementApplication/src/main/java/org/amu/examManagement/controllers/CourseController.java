@@ -59,6 +59,9 @@ public class CourseController {
         Users loggedUser = (Users) session.getAttribute("loggedUser");
         model.addAttribute("users", loggedUser);
 
+        List<Users> allUsers = usersService.getAllUsersWithRole("student");
+        model.addAttribute("allUsers", allUsers);
+
         return "course-form";
     }
 
@@ -72,6 +75,9 @@ public class CourseController {
             // On récupère l'enseignant dont l'identifiant correspond au paramètre
             Users loggedUser = (Users) session.getAttribute("loggedUser");
             model.addAttribute("users", loggedUser);
+
+            List<Users> allUsers = usersService.getAllUsersWithRole("student");
+            model.addAttribute("allUsers", allUsers);
 
             return "course-form";
         } else {

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,9 @@ public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private QuizService quizService;
 
     @Autowired
     private ExamService examService;
@@ -38,7 +42,7 @@ public class QuestionController {
         }
 
         if (loggedUser.getRole().equals("admin") || loggedUser.getRole().equals("teacher")) {
-            // On récupère tous les question de l'application
+            // On récupère tous les questions de l'application
             List<Question> allQuestions = questionService.getAllQuestions();
             model.addAttribute("allQuestions", allQuestions);
             model.addAttribute("users", loggedUser);
@@ -87,20 +91,44 @@ public class QuestionController {
         }
     }
 
-    // Supprimer un question
+    // Supprimer une question
     @GetMapping("/questions/delete/{id}")
     public String deleteQuestion(@PathVariable("id") Long id, HttpSession session, Model model) {
 
-        questionService.deleteQuestion(id);
+        Optional<Question> questionOpt = questionService.getQuestion(id);
+        if (questionOpt.isPresent()) {
+            Question questionToDelete = questionOpt.get();
 
-        // On récupère l'utilisateur dont l'identifiant correspond au paramètre
-        Users loggedUser = (Users) session.getAttribute("loggedUser");
-        model.addAttribute("users", loggedUser);
+            // 1. On dissocie la question de l'examen (si présent)
+            Exam exam = questionToDelete.getExam();
+            if (exam != null) {
+                exam.getQuestions().remove(questionToDelete);
+                examService.saveExam(exam);
+            }
+            questionToDelete.setExam(null);
 
-        return "redirect:/questions";
+            // 2. On dissocie la question de tous les quiz auxquels elle appartient
+            if (questionToDelete.getQuizList() != null) {
+                for (Quiz quiz : new ArrayList<>(questionToDelete.getQuizList())) {
+                    quiz.getQuestionList().remove(questionToDelete);
+                    quizService.saveQuiz(quiz);
+                }
+            }
+
+            // 3. On supprime la question
+            questionService.deleteQuestion(id);
+
+            // Récupérer l'utilisateur connecté
+            Users loggedUser = (Users) session.getAttribute("loggedUser");
+            model.addAttribute("users", loggedUser);
+
+            return "redirect:/questions";
+        } else {
+            return "redirect:/error";
+        }
     }
 
-    // Enregistrer un nouveau question
+    // Enregistrer une nouvelle question
     @PostMapping("/questions")
     public String createQuestion(@ModelAttribute("question") Question question,
                              @RequestParam(name = "courseId", required = false) Long courseId,
@@ -118,12 +146,12 @@ public class QuestionController {
         return "redirect:/questions";
     }
 
-    // Mettre à jour un question
+    // Mettre à jour une question
     @PostMapping("/questions/update/{id}")
     public String updateQuestion(@PathVariable("id") Long id,
                              @ModelAttribute("question") Question question) {
 
-        // On va chercher le question existant pour le mettre à jour
+        // On va chercher la question existante pour la mettre à jour
         Optional<Question> questionOpt = questionService.getQuestion(id);
         if(questionOpt.isPresent()) {
             Question questionToUpdate = questionOpt.get();
