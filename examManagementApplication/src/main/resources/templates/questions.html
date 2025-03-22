@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des question</title>
+
+    <link rel="icon" href="/images/favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="dashboard-container d-flex" style="min-height: 100vh;">
+    <!-- Menu -->
+    <th:block th:insert="~{fragments/common.html :: menu}"></th:block>
+
+    <div class="container mt-4">
+
+        <h1>Liste des questions</h1>
+        <a class="btn btn-primary mb-3" th:href="@{/questions/add}">Ajouter une question</a>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Catégorie</th>
+                <th>Difficulté</th>
+                <th>Intitulé</th>
+                <th>Choix possible</th>
+                <th>Réponse correcte</th>
+                <th>Examen concerné</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="question : ${allQuestions}">
+                <td th:text="${question.id}"></td>
+                <td th:text="${question.category}"></td>
+                <td th:text="${question.difficultyLevel}"></td>
+                <td th:text="${question.questionTitle}"></td>
+                <td>
+                    <ol>
+                        <li th:text="${question.option1}"></li>
+                        <li th:text="${question.option2}"></li>
+                        <li th:text="${question.option3}"></li>
+                        <li th:text="${question.option4}"></li>
+                    </ol>
+                </td>
+                <td th:text="${question.rightAnswer}"></td>
+                <td th:text="${question.getExam() != null ? question.getExam().getExamTitle() : 'Aucun examen concerné'}"></td>
+                <td>
+                    <!-- Lien vers le formulaire d'édition -->
+                    <a class="btn btn-warning btn-sm"
+                       th:href="@{'/questions/edit/' + ${question.id}}">Modifier</a>
+
+                    <!-- Lien vers la suppression -->
+                    <a class="btn btn-danger btn-sm"
+                       th:href="@{'/questions/delete/' + ${question.id}}"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette question ?');">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"/>
+</body>
+</html>

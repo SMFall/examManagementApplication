@@ -8,6 +8,7 @@
             <ul class="list-unstyled">
                 <li style="margin-bottom:10px;"><a th:href="${'/users/' + users.getUser_id() + '/dashboard'}" class="text-white text-decoration-none">Accueil</a><br/></li>
                 <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/quiz" class="text-white text-decoration-none">Quiz</a><br/></li>
+                <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/questions" class="text-white text-decoration-none">Questions</a><br/></li>
                 <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/courses" class="text-white text-decoration-none">Cours</a><br/></li>
                 <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/exams" class="text-white text-decoration-none">Examens</a><br/></li>
                 <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'admin')}"><a href="/users" class="text-white text-decoration-none">Comptes</a><br/></li>

@@ -52,7 +52,7 @@
         <th:block th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}">
             <section class="stats row g-4">
                 <div class="col-sm-6">
-                    <h2>Liste des quiz</h2>
+                    <h3>Liste des quiz</h3>
                     <table class="table table-striped table-hover table-responsive">
                         <thead>
                             <tr>
@@ -69,7 +69,7 @@
                     </table>
                 </div>
                 <div class="col-sm-6">
-                    <h2>Premier examen d'un enseignant</h2>
+                    <h3>Premier examen d'un enseignant</h3>
                     <select id="usersSelect" class="form-select form-select-md">
                         <option selected value="0">-- Sélectionnez un enseignant --</option>
                         <option th:each="users : ${usersList}" th:text="${users.firstName + ' ' + users.lastName}" th:value="${users.getUser_id}"></option>
@@ -173,10 +173,9 @@
         </th:block>
 
         <br/>
-        <br/>
+        <hr/>
         <h1>Classements de l'école</h1>
         <p>Ces statistiques sont dynamiques et changent en fonction de ce qu'il se passe dans l'application.</p>
-        <hr/>
         <!-- Statistiques -->
         <section class="stats row g-4">
             <div class="col-md-4">
@@ -201,7 +200,7 @@
 
         <!-- Graphique -->
         <section class="chart mt-5">
-            <h2 class="mb-4">Taux de réussite de l'établissement</h2>
+            <h3 class="mb-4">Taux de réussite de l'établissement</h3>
             <p>Ce graphique est donné à titre d'illustration.</p>
             <canvas id="progressChart"></canvas>
         </section>

@@ -142,6 +142,89 @@ public class ExamManagementApplication implements CommandLineRunner {
 		exam2.setUsers(users);
 		examService.saveExam(exam2);
 
+		// Création de questions //
+		List<Question> allQuestions = new ArrayList<>();
+
+		// Question 1
+		Question question1 = new Question();
+		question1.setCategory("Mathématiques");
+		question1.setDifficultyLevel("Facile");
+		question1.setOption1("2x");
+		question1.setOption2("x²");
+		question1.setOption3("3x");
+		question1.setOption4("x + 2");
+		question1.setQuestionTitle("Quelle est la dérivée de x² ?");
+		question1.setRightAnswer(1);
+		question1.setExam(exam);
+
+		// Question 2
+		Question question2 = new Question();
+		question2.setCategory("Physique");
+		question2.setDifficultyLevel("Moyen");
+		question2.setOption1("9.8 m/s²");
+		question2.setOption2("9.6 m/s²");
+		question2.setOption3("9.81 m/s²");
+		question2.setOption4("10 m/s²");
+		question2.setQuestionTitle("Quelle est l'accélération due à la gravité sur Terre ?");
+		question2.setRightAnswer(3);
+		question2.setExam(null);
+
+		// Question 3
+		Question question3 = new Question();
+		question3.setCategory("Chimie");
+		question3.setDifficultyLevel("Difficile");
+		question3.setOption1("H₂O");
+		question3.setOption2("CO₂");
+		question3.setOption3("NaCl");
+		question3.setOption4("O₂");
+		question3.setQuestionTitle("Quelle est la formule chimique de l'eau ?");
+		question3.setRightAnswer(1);
+		question3.setExam(null);
+
+		// Question 4
+		Question question4 = new Question();
+		question4.setCategory("Histoire");
+		question4.setDifficultyLevel("Facile");
+		question4.setOption1("1914");
+		question4.setOption2("1939");
+		question4.setOption3("1945");
+		question4.setOption4("1968");
+		question4.setQuestionTitle("En quelle année a débuté la Première Guerre mondiale ?");
+		question4.setRightAnswer(1);
+		question4.setExam(null);
+
+		// Question 5
+		Question question5 = new Question();
+		question5.setCategory("Géographie");
+		question5.setDifficultyLevel("Moyen");
+		question5.setOption1("Paris");
+		question5.setOption2("Lyon");
+		question5.setOption3("Marseille");
+		question5.setOption4("Toulouse");
+		question5.setQuestionTitle("Quelle est la capitale de la France ?");
+		question5.setRightAnswer(1);
+		question5.setExam(null);
+
+		// Question 6
+		Question question6 = new Question();
+		question6.setCategory("Français");
+		question6.setDifficultyLevel("Moyen");
+		question6.setOption1("Victor Hugo");
+		question6.setOption2("Emile Zola");
+		question6.setOption3("Gustave Flaubert");
+		question6.setOption4("Honoré de Balzac");
+		question6.setQuestionTitle("Qui a écrit 'Les Misérables' ?");
+		question6.setRightAnswer(1);
+		question6.setExam(null);
+
+		allQuestions.add(question1);
+		allQuestions.add(question2);
+		allQuestions.add(question3);
+		allQuestions.add(question4);
+		allQuestions.add(question5);
+		allQuestions.add(question6);
+		questionService.saveAllQuestions(allQuestions);
+
 		// Création de plusieurs quiz
 
 		Quiz quiz1 = new Quiz();
@@ -154,13 +237,38 @@ public class ExamManagementApplication implements CommandLineRunner {
 		Quiz quiz8 = new Quiz();
 
 		quiz1.setTitle("Quiz Mathématiques");
+		List<Question> quiz1QuestionList = new ArrayList<>();
+		quiz1QuestionList.add(question1);
+		quiz1.setQuestionList(quiz1QuestionList);
+
 		quiz2.setTitle("Quiz Français");
+		List<Question> quiz2QuestionList = new ArrayList<>();
+		quiz2QuestionList.add(question6);
+		quiz2.setQuestionList(quiz2QuestionList);
+
 		quiz3.setTitle("Quiz Anglais");
+
 		quiz4.setTitle("Quiz Histoire");
+		List<Question> quiz4QuestionList = new ArrayList<>();
+		quiz4QuestionList.add(question4);
+		quiz4.setQuestionList(quiz4QuestionList);
+
 		quiz5.setTitle("Quiz Géographie");
+		List<Question> quiz5QuestionList = new ArrayList<>();
+		quiz5QuestionList.add(question5);
+		quiz5.setQuestionList(quiz5QuestionList);
+
 		quiz6.setTitle("Quiz Espagnol");
-		quiz7.setTitle("Quiz Biologie");
+
+		quiz7.setTitle("Quiz Physique");
+		List<Question> quiz7QuestionList = new ArrayList<>();
+		quiz7QuestionList.add(question2);
+		quiz7.setQuestionList(quiz7QuestionList);
+
 		quiz8.setTitle("Quiz Chimie");
+		List<Question> quiz8QuestionList = new ArrayList<>();
+		quiz8QuestionList.add(question3);
+		quiz8.setQuestionList(quiz8QuestionList);
 
 		List<Quiz> quizList = new ArrayList<>();
 		quizList.add(quiz1);
@@ -173,19 +281,6 @@ public class ExamManagementApplication implements CommandLineRunner {
 		quizList.add(quiz8);
 
 		quizService.saveAllQuiz(quizList);
-
-		// Création d'une question
-		Question question = new Question();
-		question.setCategory("Mathématiques");
-		question.setDifficultyLevel("Facile");
-		question.setOption1("2x");
-		question.setOption2("x²");
-		question.setOption3("3x");
-		question.setOption4("x + 2");
-		question.setQuestionTitle("Quelle est la dérivée de x² ?");
-		question.setRightAnswer(1);
-		question.setExam(exam);
-		questionService.saveQuestion(question);
 
 		System.out.println("Données initialisées !");
 	}
