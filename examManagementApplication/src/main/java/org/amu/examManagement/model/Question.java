@@ -28,14 +28,15 @@ public class Question {
     private Exam exam;
 
     // Relation ManyToMany avec Quiz
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy="questionList", fetch=FetchType.EAGER)
     private List<Quiz> quizList;
+
 
     // Constructeur par défaut
     public Question() {}
 
     // Constructeur avec paramètres
-    public Question(Long id, String category, String difficultyLevel, String option1, String option2, String option3, String option4, String questionTitle, Integer rightAnswer, Exam exam) {
+    public Question(Long id, String category, String difficultyLevel, String option1, String option2, String option3, String option4, String questionTitle, Integer rightAnswer, Exam exam, List<Quiz> quizList) {
         this.id = id;
         this.category = category;
         this.difficultyLevel = difficultyLevel;
@@ -46,6 +47,7 @@ public class Question {
         this.questionTitle = questionTitle;
         this.rightAnswer = rightAnswer;
         this.exam = exam;
+        this.quizList = quizList;
     }
 
     // Getters and Setters
@@ -119,4 +121,11 @@ public class Question {
         this.exam = exam;
     }
 
+    public List<Quiz> getQuizList() {
+        return quizList;
+    }
+
+    public void setQuizList(List<Quiz> quizList) {
+        this.quizList = quizList;
+    }
 }

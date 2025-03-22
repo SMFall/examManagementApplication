@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulaire examen</title>
+
+    <link rel="icon" href="/images/favicon.ico">
     <!-- Bootstrap CSS -->
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link rel="stylesheet"
@@ -12,7 +14,7 @@
 
 <div class="dashboard-container d-flex" style="min-height: 100vh;">
     <!-- Menu -->
-    <th:block th:include="fragments/common.html :: menu"/>
+    <th:block th:insert="~{fragments/common.html :: menu}"></th:block>
 
     <div class="container mt-4">
         <h1 th:text="${exam.id != null} ? 'Modifier Examen' : 'Créer un Examen'"></h1>

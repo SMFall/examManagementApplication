@@ -90,7 +90,7 @@ public class AdminController {
         }
     }
 
-    // Supprimer un examen
+    // Supprimer un utilisateur
     @GetMapping("/users/delete/{id}")
     public String deleteUsers(@PathVariable("id") Long id, HttpSession session, Model model) {
 
@@ -103,7 +103,7 @@ public class AdminController {
         return "redirect:/users";
     }
 
-    // Enregistrer un nouvel examen
+    // Enregistrer un nouvel utilisateur
     @PostMapping("/users")
     public String createUsers(@ModelAttribute("editedUsers") Users editedUsers,
                              @RequestParam(name = "courseId", required = false) Long courseId,
@@ -126,7 +126,7 @@ public class AdminController {
     public String updateUsers(@PathVariable("id") Long id,
                              @ModelAttribute("editedUsers") Users editedUsers) {
 
-        // On va chercher l'examen existant pour le mettre à jour
+        // On va chercher l'utilisateur existant pour le mettre à jour
         Optional<Users> usersOpt = usersService.getUsers(id);
         if(usersOpt.isPresent()) {
             Users usersToUpdate = usersOpt.get();

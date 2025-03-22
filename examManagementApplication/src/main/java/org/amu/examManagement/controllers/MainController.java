@@ -55,6 +55,8 @@ public class MainController {
 
             // On récupère l'enseignant dont l'identifiant correspond au paramètre
             model.addAttribute("users", loggedUser);
+
+            return "exams";
         } if ("admin".equals(loggedUser.getRole())) {
             // On récupère les exams
             List<Exam> exams = examService.getAllExams();
