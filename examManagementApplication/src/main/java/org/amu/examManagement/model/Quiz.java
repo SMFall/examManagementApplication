@@ -13,7 +13,12 @@ public class Quiz {
 
     private String title;
 
-    @ManyToMany(mappedBy="quizList",fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "QUESTION_QUIZ_LIST",
+            joinColumns = @JoinColumn(name = "QUIZ_LIST_ID"),
+            inverseJoinColumns = @JoinColumn(name = "QUESTION_LIST_ID")
+    )
     private List<Question> questionList;
 
     public Quiz() {}
@@ -32,5 +37,12 @@ public class Quiz {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Question> getQuestionList() {
+        return questionList;
+    }
+    public void setQuestionList(List<Question> questionList) {
+        this.questionList = questionList;
     }
 }
