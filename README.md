@@ -15,7 +15,7 @@ Elle offre à la fois :
 - [👤 Présentation de notre équipe](#-présentation-de-notre-équipe)  
 - [🎯 Présentation du projet](#-présentation-du-projet)  
 - [📁 Structure du dépôt](#-structure-du-dépôt)
-- [🗃️ Schéma de la base de données](#-schéma-de-la-base-de-données)
+- [🗃️ Schéma de la base de données](#-%EF%B8%8F-schéma-de-la-base-de-données)
 - [📦 Dépendances](#-dépendances)
 - [🛠️ Modifications et améliorations](#%EF%B8%8F-modifications-et-améliorations)  
 - [🚀 Lancer l’application](#-lance-application)
