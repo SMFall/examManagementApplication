@@ -92,7 +92,7 @@
         <!-- Tableau de bord Étudiant -->
         <th:block th:if="${#strings.equals(users.role, 'student')}">
             <input type="hidden" id="userId" th:value="${users.getUser_id}"/>
-            <h3>Liste de mes examens</h3>
+            <h3>Mes examens</h3>
             <table class="table table-striped table-hover table-responsive">
                 <thead>
                 <tr>

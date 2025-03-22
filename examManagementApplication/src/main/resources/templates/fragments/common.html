@@ -11,6 +11,7 @@
                 <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/questions" class="text-white text-decoration-none">Questions</a><br/></li>
                 <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/courses" class="text-white text-decoration-none">Cours</a><br/></li>
                 <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'teacher') or #strings.equals(users.role, 'admin')}"><a href="/exams" class="text-white text-decoration-none">Examens</a><br/></li>
+                <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'student')}"><a href="/timetable" class="text-white text-decoration-none">Mes cours</a><br/></li>
                 <li style="margin-bottom:10px;" th:if="${#strings.equals(users.role, 'admin')}"><a href="/users" class="text-white text-decoration-none">Comptes</a><br/></li>
                 <li style="margin-bottom:10px;"><a href="/mails" class="text-white text-decoration-none">Messages</a><span class="badge badge-danger" style="background-color: #dc3545; border-radius: 50px; margin-left: 10px; margin-top: 0px;">14</span><br/></li>
                 <li style="margin-bottom:10px;"><a href="/settings" class="text-white text-decoration-none">Paramètres</a><br/></li>
