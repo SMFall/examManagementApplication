@@ -19,7 +19,7 @@ Elle offre à la fois :
 - [📦 Dépendances](#-dépendances)
 - [🛠️ Modifications et améliorations](#%EF%B8%8F-modifications-et-améliorations)  
 - [🚀 Lancer l’application](#-lancer-lapplication)
-- [🌐 Utiliser l’API REST : exemples d’appels](#-utiliser-api-rest)
+- [🌐 Utiliser l’API REST : exemples d’appels](#-utiliser-lapi-rest--exemples-dappels)
 - [🔑 Gestion des rôles et authentification](#-gestion-auth)
 - [👁️ Observations et points forts](#observations-points-forts)
 
