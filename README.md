@@ -21,7 +21,7 @@ Elle offre à la fois :
 - [🚀 Lancer l’application](#-lancer-lapplication)
 - [🌐 Utiliser l’API REST : exemples d’appels](#-utiliser-lapi-rest--exemples-dappels)
 - [🔑 Gestion des rôles et authentification](#-gestion-des-rôles-et-authentification)
-- [👁️ Observations et points forts](#observations-points-forts)
+- [👁️ Observations et points forts](#%EF%B8%8F-observations-et-points-forts)
 
 ---
 
