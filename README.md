@@ -55,10 +55,13 @@ Une **API REST** est également disponible pour permettre des intégrations ou d
 │   │   │       └── amu
 │   │   │           └── examManagement
 │   │   │               ├── controllers
+│   │   │               │   ├── AdminController.java
 │   │   │               │   ├── AuthController.java
 │   │   │               │   ├── ExamRestController.java
 │   │   │               │   ├── ExceptionController.java
-│   │   │               │   └── MainController.java
+│   │   │               │   ├── MailController.java
+│   │   │               │   ├── MainController.java
+│   │   │               │   └── SettingsController.java
 │   │   │               ├── model
 │   │   │               │   ├── Course.java
 │   │   │               │   ├── Exam.java
@@ -97,7 +100,11 @@ Une **API REST** est également disponible pour permettre des intégrations ou d
 │   │   │   │   ├── exam-form.html
 │   │   │   │   ├── exams.html
 │   │   │   │   ├── homepage.html
-│   │   │   │   └── login.html
+│   │   │   │   ├── login.html
+│   │   │   │   ├── mails.html
+│   │   │   │   ├── settings.html
+│   │   │   │   ├── users.html
+│   │   │   │   └── users-form.html
 │   │   └── application.properties
 ├── .gitattributes
 ├── .gitignore
