@@ -18,7 +18,7 @@ Elle offre à la fois :
 - [🗃️ Schéma de la base de données](#%EF%B8%8F-schéma-de-la-base-de-données)
 - [📦 Dépendances](#-dépendances)
 - [🛠️ Modifications et améliorations](#%EF%B8%8F-modifications-et-améliorations)  
-- [🚀 Lancer l’application](#-lance-application)
+- [🚀 Lancer l’application](#-lancer-lapplication)
 - [🌐 Utiliser l’API REST : exemples d’appels](#-utiliser-api-rest)
 - [🔑 Gestion des rôles et authentification](#-gestion-auth)
 - [👁️ Observations et points forts](#observations-points-forts)
