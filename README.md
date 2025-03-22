@@ -1,21 +1,27 @@
 # 📝 Exam Management Application
 
-Cette application est un système de gestion d'examens développé en Spring Boot et Thymeleaf, permettant de gérer des utilisateurs (enseignants, étudiants et administrateurs), des cours, des examens, des quiz et des questions. 
+Cette application est un système de gestion d’examens développé en Spring Boot et Thymeleaf, permettant de gérer des utilisateurs (enseignants, étudiants et administrateurs), des cours, des examens, des quiz et des questions.
 
-Elle offre à la fois une interface web et une API REST pour effectuer les opérations CRUD (Create, Read, Update, Delete) sur les différentes entités.
+Elle offre à la fois : 
+
+🔹 Une interface web (avec Thymeleaf)
+
+🔹 Une API REST pour les opérations CRUD (Create, Read, Update, Delete) sur les différentes entités.
 
 ---  
 
 ## 📖 Table des matières  
 
 - [👤 Présentation de notre équipe](#-présentation-de-notre-équipe)  
-- [🎯 Présentation du projet](#-présentation-de-notre-équipe)  
+- [🎯 Présentation du projet](#-présentation-du-projet)  
 - [📁 Structure du dépôt](#-structure-du-dépôt)
-- [🗃️ Schéma de la base de données](#-schema-bdd)
+- [🗃️ Schéma de la base de données](#-schéma-de-la-base-de-données)
 - [📦 Dépendances](#-dépendances)
 - [🛠️ Modifications et améliorations](#%EF%B8%8F-modifications-et-améliorations)  
-- [🚀 Lancer l’application](#-lance-app)   
-- [👁️ Observations et points forts](#observations-points-forts)   
+- [🚀 Lancer l’application](#-lance-application)
+- [🌐 Utiliser l’API REST : exemples d’appels](#-utiliser-api-rest)
+- [🔑 Gestion des rôles et authentification](#-gestion-auth)
+- [👁️ Observations et points forts](#observations-points-forts)
 
 ---
 
@@ -118,11 +124,13 @@ Une **API REST** est également disponible pour permettre des intégrations ou d
 
 🔹 exam : représente un examen, lié à un cours et à un enseignant.
 
-🔹 exam_students : table d’association.
+### Les tables d'association :
 
-🔹 course_students : table d’association.
+🔹 exam_students
 
-🔹 quiz_question : table d’association.
+🔹 course_students
+
+🔹 quiz_question
 
 ---
 
@@ -130,12 +138,13 @@ Une **API REST** est également disponible pour permettre des intégrations ou d
 
 Ce projet utilise notamment :  
 
+- **Java 17 (conseillé)**
 - **Spring Boot**
 - **Spring Data JPA**
-- **Gradle Groovy**
+- **Gradle (Groovy)**
 - **Thymeleaf**  
 - **Hibernate**  
-- **H2 Database**
+- **H2 Database** (base de données en mémoire)
 
 ---
 
@@ -143,9 +152,13 @@ Ce projet utilise notamment :
 
 Au fil du développement, plusieurs améliorations ont été apportées :
 
-🔹 Formulaire d’ajout d’examen, de cours et d'utilisateur.
+🔹 Formulaires d’ajout d’examen, de cours et d’utilisateur.
 
 🔹 Gestion des rôles (admin/teacher/student) pour adapter le contenu du dashboard.
+
+🔹 Sécurité basique (connexion nécessaire pour accéder au dashboard).
+
+🔹 Calendrier pour afficher les examens d’un étudiant.
 
 ---
 
@@ -171,15 +184,95 @@ Username : user
 Password : password
 ```
 
-## 👁️ Observations et points forts  
+## 🌐 Utiliser l’API REST : exemples d’appels
 
-🔹 Architecture claire (séparation Controllers / Services / Repositories / Entités)
+### Récupérer la liste de tous les examens
+```text
+Méthode : GET
+URL : /api/exams
+```
+Exemple :
+```text
+curl -X GET http://localhost:8081/api/exams
+```
 
-🔹 API REST pour les opérations CRUD
+### Créer un nouvel examen
+```text
+Méthode : POST
+URL : /api/exams
+```
+Body (JSON) :
+```json
+{
+  "examTitle": "Examen sur Spring Boot",
+  "examDate": "2025-05-10"
+}
+```
 
-🔹 Intégration de Thymeleaf pour le front-end
+### Obtenir le premier examen d’un enseignant
+```text
+Méthode : GET
+URL : /api/exams/firstExam/{teacherId}
+```
+Exemple :
+```text
+curl -X GET http://localhost:8081/api/exams/firstExam/1
+```
 
-🔹 Système d’authentification (sécurite car le dashboard nécessite un login).
+### Mettre à jour un examen
+
+```text
+Méthode : PUT
+URL : /api/exams/{id}
+```
+Body (JSON) :
+```json
+{
+  "examTitle": "Examen modifié",
+  "examDate": "2025-06-15"
+}
+```
+
+### Supprimer un examen
+
+```text
+Méthode : DELETE
+URL : /api/exams/{id}
+```
+Exemple :
+```text
+curl -X DELETE http://localhost:8081/api/exams/10
+```
+
+## 🔑 Gestion des rôles et authentification
+
+### Le projet propose une authentification basique
+
+Rôles disponibles : admin, teacher, student
+
+Lorsqu’un utilisateur se connecte, le système vérifie son rôle et affiche un dashboard adapté.
+
+Certaines pages sont restreintes (nécessitent d’être connecté).
+
+### Exemples de scénarios
+Un professeur (teacher) verra uniquement ses examens.
+
+Un admin verra tous les examens et pourra administrer l’ensemble des données.
+
+Un étudiant (student) accédera à son calendrier et à la liste de ses examens.
+
+
+## 👁️ Observations et points forts
+
+🔹 Architecture claire : séparation Controllers / Services / Repositories / Entités.
+
+🔹 API REST pour les opérations CRUD.
+
+🔹 Intégration de Thymeleaf pour le front-end.
+
+🔹 Système d’authentification (sécurité basique, le dashboard nécessite un login).
+
+🔹 Approche modulaire (facile à étendre ou à personnaliser).
 
 ---
 
