@@ -94,11 +94,13 @@ Une **API REST** est également disponible pour permettre des intégrations ou d
 │   │   │   │       └── favicon.ico
 │   │   │   └── templates
 │   │   │   │   ├── 404.html
+│   │   │   │   ├── contact.html
 │   │   │   │   ├── course-form.html
 │   │   │   │   ├── courses.html
 │   │   │   │   ├── dashboard.html
 │   │   │   │   ├── exam-form.html
 │   │   │   │   ├── exams.html
+│   │   │   │   ├── features.html
 │   │   │   │   ├── homepage.html
 │   │   │   │   ├── login.html
 │   │   │   │   ├── mails.html
