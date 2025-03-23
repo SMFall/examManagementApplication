@@ -37,7 +37,9 @@ L’objectif principal est de proposer un système centralisé pour :
 
 🔹 Gérer des utilisateurs (enseignants, étudiants et administrateurs)
 
-🔹 Créer, consulter, modifier et supprimer des cours, quiz, examens, utilisateurs 
+🔹 Créer, consulter, modifier et supprimer des cours, quiz, examens, utilisateurs
+
+🔹 Possibilité de lier des étudiants à un cours, des questions à un examen et des quiz à une question
 
 Le **front-end** est réalisé avec **Thymeleaf** (affichage des pages, formulaires) et le **back-end** avec **Spring Boot** et **Spring Data JPA** pour la persistance.
 
