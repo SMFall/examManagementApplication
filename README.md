@@ -57,11 +57,16 @@ Une **API REST** est également disponible pour permettre des intégrations ou d
 │   │   │               ├── controllers
 │   │   │               │   ├── AdminController.java
 │   │   │               │   ├── AuthController.java
+│   │   │               │   ├── CourseController.java
+│   │   │               │   ├── ExamController.java
 │   │   │               │   ├── ExamRestController.java
 │   │   │               │   ├── ExceptionController.java
 │   │   │               │   ├── MailController.java
 │   │   │               │   ├── MainController.java
-│   │   │               │   └── SettingsController.java
+│   │   │               │   ├── QuestionController.java
+│   │   │               │   ├── QuizController.java
+│   │   │               │   ├── SettingsController.java
+│   │   │               │   └── TimetableController.java
 │   │   │               ├── model
 │   │   │               │   ├── Course.java
 │   │   │               │   ├── Exam.java
@@ -104,7 +109,12 @@ Une **API REST** est également disponible pour permettre des intégrations ou d
 │   │   │   │   ├── homepage.html
 │   │   │   │   ├── login.html
 │   │   │   │   ├── mails.html
+│   │   │   │   ├── question-form.html
+│   │   │   │   ├── questions.html
+│   │   │   │   ├── quiz.html
+│   │   │   │   ├── quiz-form.html
 │   │   │   │   ├── settings.html
+│   │   │   │   ├── timetable.html
 │   │   │   │   ├── users.html
 │   │   │   │   └── users-form.html
 │   │   └── application.properties
